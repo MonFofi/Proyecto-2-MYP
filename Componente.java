@@ -1,4 +1,4 @@
 public interface Componente{
   public String getCodigoDeBarras();
-  public String getNumeroDeSerie();
+  public int getNumeroDeSerie();
 }

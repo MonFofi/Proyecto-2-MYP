@@ -1,14 +1,14 @@
 public class Chip implements Componente{
   private String codigoBarras;
-  private String numeroDeSerie;
+  private int numeroDeSerie;
   private EstadosChip disponible;
   private EstadosChip reservado;
   private EstadosChip vendido;
   private EstadosChip estadoActual;
 
-  public Chip (String codigoBarras, String numeroDeSerie){
+  public Chip (String codigoBarras){
     this.codigoBarras = codigoBarras;
-    this.numeroDeSerie = numeroDeSerie;
+    numeroDeSerie = getNumeroDeSerie();
     disponible = new EstadoDisponible(this);
     reservado = new EstadoReservado(this);
     vendido = new EstadoVendido(this);
@@ -21,13 +21,22 @@ public class Chip implements Componente{
   }
 
   @Override
-  public String getNumeroDeSerie(){
-    return numeroDeSerie;
+  public int getNumeroDeSerie(){
+    if (codigoBarras.length() == 18 || codigoBarras.length() == 19) {
+      return numeroDeSerie = Integer.parseInt(codigoBarras.substring(12, 18));
+    } else {
+      return -1;
+    }
   }
 
   //Este es para imprimir los datos de cada chip?
   public void mostrarChip(){
-    System.out.println("");
+    if(numeroDeSerie == -1){
+      System.out.println("\nEl código de barras no es válido.");
+    } else {
+      System.out.println("\nCódigo de barras: " + getCodigoDeBarras() +
+                         "\nNúmero de serie: " + getNumeroDeSerie());
+    }
   }
 
   //estados
@@ -36,10 +45,17 @@ public class Chip implements Componente{
   }
 
   public void estadoReservado(){
+    estadoActual = reservado;
     estadoActual.confirmarCompra();
   }
 
+  public void estadoCancelado(){
+    estadoActual.cancelarReserva();
+    estadoActual = disponible;
+  }
+
   public void estadoVendido(){
+    estadoActual = vendido;
     estadoActual.confirmarCompra();
   }
 
