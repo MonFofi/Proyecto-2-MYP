@@ -4,7 +4,7 @@ import java.util.Iterator;
 public class HashMapUsuarios{
   //en el diagrama de clases viene de tipo Usuarios pero no supe si
   //se refería a otra clase o a la interfaz xd
-  private HashMap<String, InterfazUsuarios> usuarios;
+  private HashMap<String, InterfazMenu> usuarios;
 
   public HashMapUsuarios(){
 
