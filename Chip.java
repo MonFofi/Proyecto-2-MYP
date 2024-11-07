@@ -1,3 +1,7 @@
+/**
+ * Clase que representa un chip que se repartirá a los vendedores y
+ * podrá ser reservado, cancelar su reservación o venderse.
+ */
 public class Chip implements Componente{
   private String codigoBarras;
   private int numeroDeSerie;
@@ -6,6 +10,10 @@ public class Chip implements Componente{
   private EstadosChip vendido;
   private EstadosChip estadoActual;
 
+  /**
+   * Constructor de la clase Chip.
+   * @param codigoBarras El código de barras del Chip.
+   */
   public Chip (String codigoBarras){
     this.codigoBarras = codigoBarras;
     numeroDeSerie = getNumeroDeSerie();
@@ -15,11 +23,25 @@ public class Chip implements Componente{
     estadoActual = disponible;
   }
 
+   /**
+   * Método getCodigoDeBarras.
+   * Regresa el código de barras del Chip.
+   * @return codigoBarras El código de barras completo del Chip.
+   */
   @Override
   public String getCodigoDeBarras(){
     return codigoBarras;
   }
 
+  /**
+   * Método getNumeroDeSerie.
+   * Separa el código de barras del Chip para
+   * poder obtener los dígitos deseados y así
+   * devuelve el número del Chip.
+   * @return numeroDeSerie si el código de barras tiene una longitud de 18 o 19 dígitos. Es
+   * el número identificador del Chip.
+   * @return -1 si el código de barras es inválido.
+   */
   @Override
   public int getNumeroDeSerie(){
     if (codigoBarras.length() == 18 || codigoBarras.length() == 19) {
@@ -40,25 +62,48 @@ public class Chip implements Componente{
   }
 
   //estados
+  /**
+   * Método que permite modificar el estado del Chip
+   * a disponible para vender o reservar.
+   */
   public void estadoDisponible(){
     estadoActual.reservar();
   }
 
+  /**
+   * Método que permite modificar el estado del Chip
+   * a reservado para que no pueda ser usado, se puede
+   * cancelar la reservación para pasarlo a disponible
+   * nuevamente o venderlo.
+   */
   public void estadoReservado(){
     estadoActual = reservado;
     estadoActual.confirmarCompra();
   }
 
+  /**
+   * Método que permite modificar el estado del Chip
+   * a cancelar su reservación para pasarlo de nuevo a 
+   * disponible y permitir su uso nuevamente.
+   */
   public void estadoCancelado(){
     estadoActual.cancelarReserva();
     estadoActual = disponible;
   }
 
+  /**
+   * Método que permite modificar el estado del Chip
+   * a vendido para indicar que el chip ya se ha vendido.
+   */
   public void estadoVendido(){
     estadoActual = vendido;
     estadoActual.confirmarCompra();
   }
 
+  /**
+   * Método que permite ver la confirmación de venta del
+   * chip.
+   */
   public void chipVendido(){
     estadoActual.venta();
   }
