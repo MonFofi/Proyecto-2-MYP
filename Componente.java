@@ -10,6 +10,6 @@ public interface Componente{
    * poder obtener los dígitos deseados y así
    * devuelve el número del Chip.
    */
-  public int getNumeroDeSerie();
+  public String getNumeroDeSerie();
 
 }

@@ -1,7 +1,6 @@
 import java.util.LinkedList;
 public class CajaChipsBuilder implements Builder{
   private String codigoDeBarras;
-  private int numeroDeSerie;
   private ListaDeChips listaDeChips;
 
   @Override
@@ -15,23 +14,7 @@ public class CajaChipsBuilder implements Builder{
     this.listaDeChips = listaDeChips;
     return this;
   }
-
-  public boolean codigoDeBarrasValido(){
-    return codigoDeBarras.length() == 18 || codigoDeBarras.length() == 19;
-  }
-
-  public String getCodigoDeBarras(){
-    return codigoDeBarras;
-  }
-
-  public ListaDeChips getListaDeChips(){
-    return listaDeChips;
-  }
-
-  public int getNumeroSerie(){
-    return (codigoDeBarrasValido()) ? Integer.parseInt(codigoDeBarras.substring(12, 18)) : -1;
-  }
-
+  
   @Override
   public CajaChips construir(){
     int numeroInicial = getNumeroSerie();
@@ -44,4 +27,22 @@ public class CajaChipsBuilder implements Builder{
     }
     return new CajaChips(this);
   }
+
+  public String getCodigoDeBarras(){
+    return codigoDeBarras;
+  }
+
+  public ListaDeChips getListaDeChips(){
+    return listaDeChips;
+  }
+
+  public int getNumeroSerie(){
+    int numeroDeSerie;
+    return numeroDeSerie = (codigoDeBarrasValido()) ? Integer.parseInt(codigoDeBarras.substring(12, 18)) : -1;
+  }
+
+  public boolean codigoDeBarrasValido(){
+    return codigoDeBarras.length() == 18 || codigoDeBarras.length() == 19;
+  }
+
 }

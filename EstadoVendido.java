@@ -5,6 +5,10 @@ public class EstadoVendido implements EstadosChip{
     this.chip = chip;
   }
 
+  public String disponible(){
+    return "Chip no disponible, ha sido vendido.";
+  }
+
   public String reservar(){
     return "No es posible reservar un chip ya vendido.";
   }

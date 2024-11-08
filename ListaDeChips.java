@@ -17,14 +17,17 @@ public class ListaDeChips{
   }
 
   public void mostrarChips(){
-    Iterator iterator = getIteratorChips();
+    Iterator<Chip> iterator = getIteratorChips();
     int contador = 1;
     while (iterator.hasNext()) {
-      System.out.println(contador + ". " + iterator.next());
+      Chip chip = iterator.next();  // Sin necesidad de casting
+      System.out.print(contador + ". ");
+      chip.mostrarChip();
       contador++;
     }
   }
   
+
   // public void buscar(){
   //   Iterator iterator = getIteratorChips();
   //   int contador = 1;

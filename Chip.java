@@ -3,7 +3,6 @@
  * podrá ser reservado, cancelar su reservación o venderse.
  */
 public class Chip implements Componente{
-  // private String codigoBarras;
   private int numeroDeSerie;
   private EstadosChip disponible;
   private EstadosChip reservado;
@@ -15,7 +14,6 @@ public class Chip implements Componente{
    * @param codigoBarras El código de barras del Chip.
    */
   public Chip (int numeroDeSerie){
-    // this.codigoBarras = codigoBarras;
     this.numeroDeSerie = numeroDeSerie;
     disponible = new EstadoDisponible(this);
     reservado = new EstadoReservado(this);
@@ -30,16 +28,19 @@ public class Chip implements Componente{
    * Método getNumeroDeSerie.
    */
   @Override
-  public int getNumeroDeSerie(){
-    return numeroDeSerie;
+  public String getNumeroDeSerie(){
+    int numero = numeroDeSerie;
+    String numeroComoTexto = String.format("%06d", numero);
+    return numeroComoTexto;
   }
+
 
   //Este es para imprimir los datos de cada chip?
   public void mostrarChip(){
     if(numeroDeSerie == -1){
       System.out.println("\nEl código de barras no es válido.");
     } else {
-      System.out.println("\nNúmero de serie: " + getNumeroDeSerie());
+      System.out.println("Número de serie: " + getNumeroDeSerie());
     }
   }
 
@@ -60,13 +61,16 @@ public class Chip implements Componente{
     return vendido;
   }
 
+  public EstadosChip getEstadoActual(){
+    return estadoActual;
+  }
 
   /**
    * Método que permite modificar el estado del Chip
    * a disponible para vender o reservar.
    */
   public void estadoDisponible(){
-    estadoActual.reservar();
+    System.out.println(estadoActual.disponible());
   }
 
   /**
@@ -76,7 +80,7 @@ public class Chip implements Componente{
    * nuevamente o venderlo.
    */
   public void estadoReservado(){
-    estadoActual.confirmarCompra();
+    System.out.println(estadoActual.reservar());
   }
 
   /**
@@ -85,7 +89,7 @@ public class Chip implements Componente{
    * disponible y permitir su uso nuevamente.
    */
   public void estadoCancelado(){
-    estadoActual.cancelarReserva();
+    System.out.println(estadoActual.cancelarReserva());
   }
 
   /**
@@ -93,15 +97,17 @@ public class Chip implements Componente{
    * a vendido para indicar que el chip ya se ha vendido.
    */
   public void estadoVendido(){
-    estadoActual.confirmarCompra();
+    System.out.println(estadoActual.venta());
+    // System.out.println(estadoActual.confirmarCompra());
   }
 
   /**
    * Método que permite ver la confirmación de venta del
    * chip.
    */
-  public void chipVendido(){
-    estadoActual.venta();
+  public void confirmarVenta(){
+    // System.out.println(estadoActual.venta());
+    System.out.println(estadoActual.confirmarCompra());
   }
 
 }

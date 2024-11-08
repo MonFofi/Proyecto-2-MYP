@@ -14,4 +14,9 @@ public class CajaChips{
   public ListaDeChips getCaja(){
     return listaDeChips;
   }
+
+  public void mostrarCaja(){
+    listaDeChips.mostrarChips();
+  }
+
 }

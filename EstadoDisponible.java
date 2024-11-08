@@ -5,9 +5,13 @@ public class EstadoDisponible implements EstadosChip{
     this.chip = chip;
   }
 
+  public String disponible(){
+    return "Chip disponible para reservar o comprar.";
+  } 
+
   public String reservar(){
     chip.setEstado(chip.getEstadoReservado());
-    return "Chip disponible para reservar.";
+    return "Chip disponible para reservar. Se reservará el chip.";
   }
   
   public String cancelarReserva(){
