@@ -5,20 +5,22 @@ public class EstadoDisponible implements EstadosChip{
     this.chip = chip;
   }
 
-  public void reservar(){
-    System.out.println("Chip disponible para reservar.");
+  public String reservar(){
+    chip.setEstado(chip.getEstadoReservado());
+    return "Chip disponible para reservar.";
+  }
+  
+  public String cancelarReserva(){
+    return "No puede cancelarse una reservación que aún no se ha hecho.";
   }
 
-  public void cancelarReserva(){
-    System.out.println("No puede cancelarse una reservación que aún no se ha hecho.");
+  public String confirmarCompra(){
+    return "No se puede confirmar una compra que aún no se ha hecho.";
   }
 
-  public void confirmarCompra(){
-    System.out.println("No se puede confirmar una compra que aún no se ha hecho.");
-  }
-
-  public void venta(){
-    System.out.println("Chip disponible para compra.");
+  public String venta(){
+    chip.setEstado(chip.getEstadoVendido());
+    return "Chip disponible para compra.";
   }
 
 }

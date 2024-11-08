@@ -3,12 +3,6 @@
  * patrón de diseño Builder.
  */
 public interface Componente{
-  
-  /**
-   * Método getCodigoDeBarras.
-   * Regresa el código de barras del Chip.
-   */
-  public String getCodigoDeBarras();
 
   /**
    * Método getNumeroDeSerie.

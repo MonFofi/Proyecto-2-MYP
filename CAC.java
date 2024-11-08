@@ -3,11 +3,11 @@
 public class CAC{
   public static void main(String[] args) {
 
-    Chip chip1 = new Chip("8952020224292451628");
-    Chip chip2 = new Chip("895202022429245163");
-    Chip chip3 = new Chip("8052020224292452642");
-    Chip chip4 = new Chip("3427437284723");
-    Chip chip5 = new Chip("34274372847234543786");
+    Chip chip1 = new Chip(123456);
+    Chip chip2 = new Chip(124567);
+    Chip chip3 = new Chip(234567);
+    Chip chip4 = new Chip(345678);
+    Chip chip5 = new Chip(456789);
 
     System.out.println("\n" + chip1.getNumeroDeSerie());
     System.out.println(chip2.getNumeroDeSerie());

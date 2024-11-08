@@ -3,7 +3,7 @@
  * podrá ser reservado, cancelar su reservación o venderse.
  */
 public class Chip implements Componente{
-  private String codigoBarras;
+  // private String codigoBarras;
   private int numeroDeSerie;
   private EstadosChip disponible;
   private EstadosChip reservado;
@@ -14,41 +14,24 @@ public class Chip implements Componente{
    * Constructor de la clase Chip.
    * @param codigoBarras El código de barras del Chip.
    */
-  public Chip (String codigoBarras){
-    this.codigoBarras = codigoBarras;
-    numeroDeSerie = getNumeroDeSerie();
+  public Chip (int numeroDeSerie){
+    // this.codigoBarras = codigoBarras;
+    this.numeroDeSerie = numeroDeSerie;
     disponible = new EstadoDisponible(this);
     reservado = new EstadoReservado(this);
     vendido = new EstadoVendido(this);
     estadoActual = disponible;
   }
 
-   /**
-   * Método getCodigoDeBarras.
-   * Regresa el código de barras del Chip.
-   * @return codigoBarras El código de barras completo del Chip.
-   */
-  @Override
-  public String getCodigoDeBarras(){
-    return codigoBarras;
-  }
 
+  //Moverlo a builder para pasarle al constructor de cada chip solo
+  //su número de serie.
   /**
    * Método getNumeroDeSerie.
-   * Separa el código de barras del Chip para
-   * poder obtener los dígitos deseados y así
-   * devuelve el número del Chip.
-   * @return numeroDeSerie si el código de barras tiene una longitud de 18 o 19 dígitos. Es
-   * el número identificador del Chip.
-   * @return -1 si el código de barras es inválido.
    */
   @Override
   public int getNumeroDeSerie(){
-    if (codigoBarras.length() == 18 || codigoBarras.length() == 19) {
-      return numeroDeSerie = Integer.parseInt(codigoBarras.substring(12, 18));
-    } else {
-      return -1;
-    }
+    return numeroDeSerie;
   }
 
   //Este es para imprimir los datos de cada chip?
@@ -56,12 +39,28 @@ public class Chip implements Componente{
     if(numeroDeSerie == -1){
       System.out.println("\nEl código de barras no es válido.");
     } else {
-      System.out.println("\nCódigo de barras: " + getCodigoDeBarras() +
-                         "\nNúmero de serie: " + getNumeroDeSerie());
+      System.out.println("\nNúmero de serie: " + getNumeroDeSerie());
     }
   }
 
   //estados
+  public void setEstado(EstadosChip estado) {
+    estadoActual = estado;
+  }
+
+  public EstadosChip getEstadoDisponible(){
+    return disponible;
+  }
+
+  public EstadosChip getEstadoReservado(){
+    return reservado;
+  }
+  
+  public EstadosChip getEstadoVendido(){
+    return vendido;
+  }
+
+
   /**
    * Método que permite modificar el estado del Chip
    * a disponible para vender o reservar.
@@ -77,7 +76,6 @@ public class Chip implements Componente{
    * nuevamente o venderlo.
    */
   public void estadoReservado(){
-    estadoActual = reservado;
     estadoActual.confirmarCompra();
   }
 
@@ -88,7 +86,6 @@ public class Chip implements Componente{
    */
   public void estadoCancelado(){
     estadoActual.cancelarReserva();
-    estadoActual = disponible;
   }
 
   /**
@@ -96,7 +93,6 @@ public class Chip implements Componente{
    * a vendido para indicar que el chip ya se ha vendido.
    */
   public void estadoVendido(){
-    estadoActual = vendido;
     estadoActual.confirmarCompra();
   }
 

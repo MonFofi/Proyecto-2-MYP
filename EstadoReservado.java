@@ -5,19 +5,21 @@ public class EstadoReservado implements EstadosChip{
     this.chip = chip;
   }
 
-  public void reservar(){
-    System.out.println("Chip reservado.");
+  public String reservar(){
+    return "Chip reservado.";
   }
 
-  public void cancelarReserva(){
-    System.out.println("Chip disponible para cancelar su reservación.");
+  public String cancelarReserva(){
+    chip.setEstado(chip.getEstadoDisponible());
+    return "Chip disponible para cancelar su reservación.";
   }
 
-  public void confirmarCompra(){
-    System.out.println("Chip en espera de confirmación de compra.");
+  public String confirmarCompra(){
+    chip.setEstado(chip.getEstadoVendido());
+    return "Chip en espera de confirmación de compra.";
   }
 
-  public void venta(){
-    System.out.println("Chip disponible para comprar.");
+  public String venta(){
+    return "Chip disponible para comprar.";
   }
 }

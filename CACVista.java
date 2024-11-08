@@ -57,12 +57,12 @@ public class CACVista implements CACObservador, ActionListener{
   }
 
   public void actionPerformed(ActionEvent event){
-
+    //se escanea la caja y le dice al controlador¿
   }
-
 
   @Override
   public void actualizar(){
     
   }
+
 }

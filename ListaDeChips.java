@@ -5,19 +5,33 @@ public class ListaDeChips{
   private ArrayList<Chip> listaDeChips;
    
   public ListaDeChips(){
-
+    listaDeChips =  new ArrayList<>();
   }
 
   public void agregarChip(Chip chip){
     listaDeChips.add(chip);
   }
 
-  // public Iterator<String> getIteratorChips(){
-
-  // }
+  public Iterator<Chip> getIteratorChips(){
+    return listaDeChips.iterator();
+  }
 
   public void mostrarChips(){
-    System.out.println("si");
+    Iterator iterator = getIteratorChips();
+    int contador = 1;
+    while (iterator.hasNext()) {
+      System.out.println(contador + ". " + iterator.next());
+      contador++;
+    }
   }
+  
+  // public void buscar(){
+  //   Iterator iterator = getIteratorChips();
+  //   int contador = 1;
+  //   while (iterator.hasNext()) {
+  //     System.out.println(iterator.next());
+  //     contador++;
+  //   }
+  // }
 
 }
