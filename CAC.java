@@ -1,5 +1,3 @@
-// import javax.swing.*;
-
 public class CAC{
   public static void main(String[] args) {
 
@@ -26,6 +24,11 @@ public class CAC{
     //prueba con un cero al inicio. Imprime 6 dígitos correctamente
       // ListaDeChips lista1 = new ListaDeChips();
       // CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390939011").construir();
+      // caja1.mostrarCaja();
+
+    // prueba con un cero al inicio. Imprime 6 dígitos correctamente
+      // ListaDeChips lista1 = new ListaDeChips();
+      // CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390000001").construir();
       // caja1.mostrarCaja();
 
     //prueba con más de un 0 al inicio. Imprime 6 dígitos correctamente

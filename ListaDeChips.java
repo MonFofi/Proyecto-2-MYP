@@ -16,6 +16,10 @@ public class ListaDeChips{
     return listaDeChips.iterator();
   }
 
+  public int getLongitud(){
+    return listaDeChips.size();
+  }
+
   public void mostrarChips(){
     Iterator<Chip> iterator = getIteratorChips();
     int contador = 1;
@@ -25,16 +29,16 @@ public class ListaDeChips{
       chip.mostrarChip();
       contador++;
     }
-  }
-  
+  }  
 
-  // public void buscar(){
-  //   Iterator iterator = getIteratorChips();
-  //   int contador = 1;
-  //   while (iterator.hasNext()) {
-  //     System.out.println(iterator.next());
-  //     contador++;
-  //   }
-  // }
+  public boolean contiene(Chip chip){
+    Iterator iterator = getIteratorChips();
+    while (iterator.hasNext()) {
+      if(chip.equals(iterator.next())){
+        return true;
+      }
+    }
+    return false;
+  }
 
 }

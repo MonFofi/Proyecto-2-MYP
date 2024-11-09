@@ -1,38 +1,32 @@
-public class Vendedor implements InterfazUsuarios{
-  
-  @Override()
-  public void mostrarSubmenu(){
-    System.out.println("Bienvenido \n¿Que acción quieres realizar?" +
-                        "1- Solicitar mas chips" +
-                        "2- Vender chip" +
-                        "3- Reservar chip" +
-                        "4- Cancelar reservacion de chip" +
-                        "5- Cerrar Sesion");
+public class Vendedor extends Usuarios{
+  public ListaDeChips chipsDisponibles = new ListaDeChips();
+  public ListaDeChips chipsReservados = new ListaDeChips();
+  public ListaDeChips chipsVendidos = new ListaDeChips();
+  public int chipsSolicitados;
+  // public Solicitud solicitud;
+
+  public Vendedor(String nombre){
+    super(nombre);
+    rol = "vendedor";
   }
 
   @Override
-  public void registrarUnidad(){
-    System.out.println("Escanee el código de barras del chip para registrar un movimiento en el sistema.");
+  public void escanearCodigo(String codigo){
+    System.out.println("si");
   }
 
-  @Override
-  public void registroExitoso(){
-    System.out.println("El chip se ha registrado correctamente.");
+  // @Override
+  public int chipsFaltantes(){
+    int chipsActuales = chipsDisponibles.getLongitud();
+    if(chipsActuales >= 20){
+      return 0;
+    }
+    chipsSolicitados = 20 - chipsActuales;
+    return chipsSolicitados;
   }
 
-  @Override
-  public void registroFallido(){
-    System.out.println("El chip no se ha podido registrar en el sistema.");
-  }
-
-  @Override
-  public void solicitudChips(){
-    System.out.println("Se solicitaron chips al almacén.");
-  }
-
-  @Override
-  public void cerrarSesion(){
-    System.out.println("Cerrando sesión de ***.");
-  }
+  // public void hacerSolicitud(){
+  //   solicitud = new Solicitud();
+  // }
 
 }
