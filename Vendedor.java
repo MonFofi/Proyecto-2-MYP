@@ -9,6 +9,7 @@ public class Vendedor extends Usuarios{
   public Vendedor(String nombre, String iD){
     super(nombre, iD);
     rol = "vendedor";
+    inicializarServidor();
   }
 
   @Override

@@ -7,7 +7,7 @@ public class CACServidor{
   private ListaDeChips chipsDisponibles = new ListaDeChips();
   private ListaDeChips chipsReservados = new ListaDeChips();
   private ListaDeChips chipsVendidos = new ListaDeChips();
-  private HashMapUsuarios usuarios = new HashMapUsuarios();
+  private HashMapUsuarios usuarios;
   private LinkedList<Solicitud> solicitudes = new LinkedList<>();
 
   //singleton para que puedan trabajar todas las instancias de usuarios
@@ -16,11 +16,13 @@ public class CACServidor{
   private static CACServidor instanciaUnica;
 
   private CACServidor(){
+    usuarios = new HashMapUsuarios();
   }
 
   public static CACServidor getServidor() {
     if (instanciaUnica == null) {
       instanciaUnica = new CACServidor();
+      instanciaUnica.usuarios.cargarVendedores();
     }
     return instanciaUnica;
   }
@@ -138,25 +140,25 @@ public class CACServidor{
   //consultar chips
   //chips registrados en el sistema
   public void mostrarRegistrados(){
-    System.out.println("Chips disponibles para asignar:\n");
+    System.out.println("\n*** Chips disponibles para asignar: ***");
     getChipsRegistrados().mostrarChips();
   }
 
   //chips disponibles (ya asignados)
   public void mostrarDisponibles(){
-    System.out.println("Chips disponibles para vender o reservar:\n");
+    System.out.println("\n*** Chips disponibles para vender o reservar: ***");
     getChipsDisponibles().mostrarChips();
   }
 
   //chips reservados
   public void mostrarReservados(){
-    System.out.println("Chips reservados:\n");
+    System.out.println("\n*** Chips reservados: ***");
     getChipsDisponibles().mostrarChips();
   }
 
   //chips vendidos
   public void mostrarVendidos(){
-    System.out.println("Chips vendidos:\n");
+    System.out.println("\n*** Chips vendidos: ***");
     getChipsDisponibles().mostrarChips();
   }
 

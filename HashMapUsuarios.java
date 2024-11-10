@@ -8,6 +8,9 @@ public class HashMapUsuarios{
 
   public HashMapUsuarios(){
     usuarios = new HashMap<>();
+  }
+
+  public void cargarVendedores() {
     usuarios.put("12345", new Vendedor("Carlos", "12345"));
     usuarios.put("24680", new Vendedor("Andrea", "24680"));
     usuarios.put("13579", new Vendedor("Roberto", "13579"));

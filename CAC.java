@@ -1,21 +1,22 @@
 public class CAC{
   public static void main(String[] args) {
 
-    Chip chip1 = new Chip(123456);
-    Chip chip2 = new Chip(124567);
-    Chip chip3 = new Chip(234567);
-    Chip chip4 = new Chip(345678);
-    Chip chip5 = new Chip(456789);
+    // Chip chip1 = new Chip(123456);
+    // Chip chip2 = new Chip(124567);
+    // Chip chip3 = new Chip(234567);
+    // Chip chip4 = new Chip(345678);
+    // Chip chip5 = new Chip(456789);
+    Almacenista a = new Almacenista("si", "123");
 
     /**
      * pruebas de state 
      */
     // chip1.estadoReservado()
-    chip1.estadoDisponible();
-    chip1.estadoReservado();
-    chip1.estadoCancelado();
-    chip1.estadoVendido();
-    chip1.confirmarVenta();
+    // chip1.estadoDisponible();
+    // chip1.estadoReservado();
+    // chip1.estadoCancelado();
+    // chip1.estadoVendido();
+    // chip1.confirmarVenta();
 
     /**
      * pruebas de builder
@@ -27,9 +28,11 @@ public class CAC{
       // caja1.mostrarCaja();
 
     // prueba con un cero al inicio. Imprime 6 dígitos correctamente
-      ListaDeChips lista1 = new ListaDeChips();
-      CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390000001").construir();
-      caja1.mostrarCaja();
+      // ListaDeChips lista1 = new ListaDeChips();
+      // CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390000001").construir();
+      // caja1.mostrarCaja();
+
+      
 
     //prueba con más de un 0 al inicio. Imprime 6 dígitos correctamente
       // ListaDeChips lista3 = new ListaDeChips();
@@ -41,5 +44,8 @@ public class CAC{
       // CajaChips caja2 = new CajaChipsBuilder().setListaDeChips(lista2).setCodigoDeBarras("895202002419499801").construir();
       // caja2.mostrarCaja();
 
+
+    a.escanearCodigo("895202002419499801");
+    a.verChipsRegistrados();
   }
 }

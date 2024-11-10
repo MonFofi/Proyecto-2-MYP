@@ -7,7 +7,11 @@ public abstract class Usuarios{
   public Usuarios (String nombre, String iD){
     this.nombre = nombre;
     this.iD = iD;
-    this.cac = cac.getServidor();
+    this.cac = null;
+  }
+
+  public void inicializarServidor(){
+    this.cac = CACServidor.getServidor();  // Ahora podemos acceder a la instancia única
   }
 
   public String getNombre(){
