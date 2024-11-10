@@ -1,11 +1,13 @@
 public abstract class Usuarios{
   protected String nombre;
   protected String rol;
+  protected String iD;
   protected CACServidor cac;
 
-  public Usuarios (String nombre){
+  public Usuarios (String nombre, String iD){
     this.nombre = nombre;
-    cac = new CACServidor();
+    this.iD = iD;
+    this.cac = cac.getServidor();
   }
 
   public String getNombre(){
@@ -14,6 +16,10 @@ public abstract class Usuarios{
 
   public String getRol(){
     return rol;
+  }
+
+  public String getID(){
+    return iD;
   }
 
   public abstract void escanearCodigo(String codigo);

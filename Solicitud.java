@@ -16,7 +16,7 @@ public class Solicitud{
   }
 
   public String solicitarChips(){
-    return solicitante.getNombre() + " ha solicitado " + solicitante.chipsFaltantes() + " chips.";
+    return solicitante.getID() + " ha solicitado " + solicitante.chipsFaltantes() + " chips.";
   }
 
 }

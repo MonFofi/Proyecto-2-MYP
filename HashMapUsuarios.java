@@ -8,12 +8,12 @@ public class HashMapUsuarios{
 
   public HashMapUsuarios(){
     usuarios = new HashMap<>();
-    usuarios.put("12345", new Vendedor("Carlos"));
-    usuarios.put("24680", new Vendedor("Andrea"));
-    usuarios.put("13579", new Vendedor("Roberto"));
-    usuarios.put("12457", new Vendedor("Julian"));
-    usuarios.put("23568", new Vendedor("Cintia"));
-    usuarios.put("98653", new Vendedor("Karla"));
+    usuarios.put("12345", new Vendedor("Carlos", "12345"));
+    usuarios.put("24680", new Vendedor("Andrea", "24680"));
+    usuarios.put("13579", new Vendedor("Roberto", "13579"));
+    usuarios.put("12457", new Vendedor("Julian", "12457"));
+    usuarios.put("23568", new Vendedor("Cintia", "23568"));
+    usuarios.put("98653", new Vendedor("Karla", "98653"));
   }
 
   public HashMap<String, Vendedor> getHashMap(){

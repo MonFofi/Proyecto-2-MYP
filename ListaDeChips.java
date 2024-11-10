@@ -24,7 +24,7 @@ public class ListaDeChips{
     Iterator<Chip> iterator = getIteratorChips();
     int contador = 1;
     while (iterator.hasNext()) {
-      Chip chip = iterator.next();  // Sin necesidad de casting
+      Chip chip = iterator.next();
       System.out.print(contador + ". ");
       chip.mostrarChip();
       contador++;

@@ -40,6 +40,7 @@ public class Chip implements Componente{
     if(numeroDeSerie == -1){
       System.out.println("\nEl código de barras no es válido.");
     } else {
+      // System.out.println();
       System.out.println("Número de serie: " + getNumeroDeSerie());
     }
   }

@@ -1,12 +1,13 @@
 public class Vendedor extends Usuarios{
+
   public ListaDeChips chipsDisponibles = new ListaDeChips();
   public ListaDeChips chipsReservados = new ListaDeChips();
   public ListaDeChips chipsVendidos = new ListaDeChips();
   public int chipsSolicitados;
   // public Solicitud solicitud;
 
-  public Vendedor(String nombre){
-    super(nombre);
+  public Vendedor(String nombre, String iD){
+    super(nombre, iD);
     rol = "vendedor";
   }
 
@@ -15,7 +16,11 @@ public class Vendedor extends Usuarios{
     System.out.println("si");
   }
 
-  // @Override
+  public Solicitud hacerSolicitud(){
+    return new Solicitud(this);
+  }
+
+  //metodo propio de la clase (auxiliar)  
   public int chipsFaltantes(){
     int chipsActuales = chipsDisponibles.getLongitud();
     if(chipsActuales >= 20){
@@ -24,9 +29,4 @@ public class Vendedor extends Usuarios{
     chipsSolicitados = 20 - chipsActuales;
     return chipsSolicitados;
   }
-
-  // public void hacerSolicitud(){
-  //   solicitud = new Solicitud();
-  // }
-
 }

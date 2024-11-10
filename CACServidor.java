@@ -1,18 +1,31 @@
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Iterator;
 // import java.util.Scanner;
 
 public class CACServidor{
-  public ListaDeChips chipsDisponibles = new ListaDeChips();
-  public ListaDeChips chipsReservados = new ListaDeChips();
-  public ListaDeChips chipsVendidos = new ListaDeChips();
-  public HashMapUsuarios usuarios = new HashMapUsuarios();
-  public Queue<Solicitud> solicitudes = new LinkedList<>();
+  private ListaDeChips chipsRegistrados = new ListaDeChips();
+  private ListaDeChips chipsDisponibles = new ListaDeChips();
+  private ListaDeChips chipsReservados = new ListaDeChips();
+  private ListaDeChips chipsVendidos = new ListaDeChips();
+  private HashMapUsuarios usuarios = new HashMapUsuarios();
+  private LinkedList<Solicitud> solicitudes = new LinkedList<>();
 
-  public CACServidor(){
+  //singleton para que puedan trabajar todas las instancias de usuarios
+  //con las mismas listas del servidor y no lleguen a haber inconsistencias
+  //de información.
+  private static CACServidor instanciaUnica;
+
+  private CACServidor(){
   }
 
+  public static CACServidor getServidor() {
+    if (instanciaUnica == null) {
+      instanciaUnica = new CACServidor();
+    }
+    return instanciaUnica;
+  }
+
+  //getters
   public ListaDeChips getChipsDisponibles(){
     return chipsDisponibles;
   }
@@ -25,6 +38,10 @@ public class CACServidor{
     return chipsVendidos;
   }
 
+  public ListaDeChips getChipsRegistrados(){
+    return chipsRegistrados;
+  }
+
   public HashMapUsuarios getUsuarios(){
     return usuarios;
   }
@@ -33,36 +50,129 @@ public class CACServidor{
     return solicitudes.iterator();
   }
 
-  public void recibirSolicitud(Vendedor solicitante){
-    Solicitud solicitud = new Solicitud(solicitante);
-    solicitudes.offer(solicitud);
-  }
-
-  public void mostrarSolicitudes(){
-    Iterator<Solicitud> i = getIteratorSolicitudes();
-    while(i.hasNext()){
-      System.out.println();
-    }
-  }
-
-  public void asignarChips(String id){
-    Vendedor v = usuarios.getHashMap().get(id);
-    if (v != null && chipsDisponibles.getLongitud() > 0) {
-      Iterator<Chip> iteradorChips = chipsDisponibles.getIteratorChips();        
-      while (iteradorChips.hasNext()) {
-        Chip chipAsignado = iteradorChips.next();
-            // Asegurarnos de que no se repita el mismo chip asignado
-        if (!v.chipsDisponibles.contiene(chipAsignado)) {
-          v.chipsDisponibles.agregarChip(chipAsignado);
-          break;
-        }
-      }
-    } else {
-      System.out.println("No se pudo asignar chip: vendedor no encontrado o no hay chips disponibles.");
-    }
-  }
-
+  /**Servidor
+   * + Registrar cajas °
+   * + recibir solicitud °
+   * + almacenar solicitud °
+   * + procesar una solicitud (asignar chips) °
+   * + procesar todas las solicitudes (asignar chips) °
+   * + Mostrar solicitudes °
+   * + Mostrar chips (por estados) °
+   * + cambiar chips de estado
+   */
   public void iniciarSesion(){
 
   }
+
+
+  /**
+   * Metodos para almacen
+   */
+  //registrar caja
+  public void registrarCaja(String codigo){
+    CajaChips caja = new CajaChipsBuilder().setListaDeChips(chipsRegistrados).setCodigoDeBarras(codigo).construir();
+  }
+
+  //auxiliar
+  public void recibirSolicitud(Solicitud s){
+    solicitudes.add(s);
+  }
+
+  //auxiliar
+  public void asignarChips(Solicitud solicitud){
+    Vendedor vendedor = solicitud.getSolicitante();
+    int cantidadSolicitada = solicitud.getCantidadChips();
+    if (vendedor != null && chipsRegistrados.getLongitud() >= cantidadSolicitada) {
+      Iterator<Chip> iteradorChips = chipsRegistrados.getIteratorChips(); 
+      int chipsAsignados = 0;
+      while (iteradorChips.hasNext() && chipsAsignados < cantidadSolicitada) {
+        Chip chipAsignado = iteradorChips.next();
+        vendedor.chipsDisponibles.agregarChip(chipAsignado);
+        chipsDisponibles.agregarChip(chipAsignado);
+        chipsAsignados++;
+        iteradorChips.remove();
+      }
+      if (chipsAsignados < cantidadSolicitada) {
+        System.out.println("No se pudo asignar la cantidad completa de chips solicitada para el vendedor: " + vendedor.getID());
+      } else {
+        System.out.println("Se asignaron " + chipsAsignados + " chips al vendedor: " + vendedor.getID());
+      }
+    } else {
+      System.out.println("No se pudo asignar chips: vendedor no encontrado o cantidad de chips insuficiente.");
+    }
+  }
+
+  //revisar solicitudes
+  //asignar chips a una solicitud
+  public void procesarSolicitud(Solicitud s) {
+    Iterator<Solicitud> i = solicitudes.iterator();
+    while (i.hasNext()) {
+      Solicitud solicitudActual = i.next();
+      if (solicitudActual.equals(s)) {
+        asignarChips(solicitudActual);
+        i.remove();
+        break;
+      }
+    }
+  }
+
+  //asignar chips a todas las solicitudes
+  public void procesarTodasSolicitudes(){
+    Iterator<Solicitud> iteradorSolicitudes = solicitudes.iterator();
+    while (iteradorSolicitudes.hasNext()) {
+      Solicitud solicitud = iteradorSolicitudes.next();
+      asignarChips(solicitud);
+      iteradorSolicitudes.remove();
+    }
+    System.out.println("Se han asignado chips a todos los vendedores.");
+  }
+
+  //imprimir solicitudes
+  public void mostrarSolicitudes(){
+    Iterator<Solicitud> i = getIteratorSolicitudes();
+    while(i.hasNext()){
+      System.out.println(i.next().solicitarChips());
+    }
+  }
+
+  //consultar chips
+  //chips registrados en el sistema
+  public void mostrarRegistrados(){
+    System.out.println("Chips disponibles para asignar:\n");
+    getChipsRegistrados().mostrarChips();
+  }
+
+  //chips disponibles (ya asignados)
+  public void mostrarDisponibles(){
+    System.out.println("Chips disponibles para vender o reservar:\n");
+    getChipsDisponibles().mostrarChips();
+  }
+
+  //chips reservados
+  public void mostrarReservados(){
+    System.out.println("Chips reservados:\n");
+    getChipsDisponibles().mostrarChips();
+  }
+
+  //chips vendidos
+  public void mostrarVendidos(){
+    System.out.println("Chips vendidos:\n");
+    getChipsDisponibles().mostrarChips();
+  }
+
+
+  /**Vendedores
+   * + hacer solicitud
+   * + escanear chip (cambiarlo de estado)
+   * + vender chip
+   * + reservar chip
+   * + cancelar reservacion
+   */
+
+
+  /**
+   * Métodos para vendedores
+   */
+
+
 }

@@ -1,14 +1,18 @@
 public class Almacenista extends Usuarios{
 
-  public Almacenista(String nombre){
-    super(nombre);
+  public ListaDeChips chipsDisponibles = cac.getChipsDisponibles();
+  public ListaDeChips chipsReservados = cac.getChipsReservados();
+  public ListaDeChips chipsVendidos = cac.getChipsReservados();
+
+  public Almacenista(String nombre, String iD){
+    super(nombre, iD);
     rol = "almacenista";
   }
 
-  //registras caja
+  //registrar caja
   @Override
   public void escanearCodigo(String codigo){
-    CajaChips caja = new CajaChipsBuilder().setListaDeChips(cac.getChipsDisponibles()).setCodigoDeBarras(codigo).construir();
+    cac.registrarCaja(codigo);
   }
 
   public void asignarChip(){

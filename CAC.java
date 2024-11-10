@@ -27,9 +27,9 @@ public class CAC{
       // caja1.mostrarCaja();
 
     // prueba con un cero al inicio. Imprime 6 dígitos correctamente
-      // ListaDeChips lista1 = new ListaDeChips();
-      // CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390000001").construir();
-      // caja1.mostrarCaja();
+      ListaDeChips lista1 = new ListaDeChips();
+      CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390000001").construir();
+      caja1.mostrarCaja();
 
     //prueba con más de un 0 al inicio. Imprime 6 dígitos correctamente
       // ListaDeChips lista3 = new ListaDeChips();
