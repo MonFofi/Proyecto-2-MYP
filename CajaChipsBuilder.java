@@ -22,7 +22,9 @@ public class CajaChipsBuilder implements Builder{
       throw new IllegalArgumentException("Código de barras inválido.");
     }
     for (int i = 0; i < 100; i++) {
-      Chip chip = new Chip(numeroInicial + i);
+      int numSerie = numeroInicial + i;
+      String codigoBarraCompleto = generarCodigoBarraCompleto(numSerie);
+      Chip chip = new Chip(codigoBarraCompleto);
       listaDeChips.agregarChip(chip);
     }
     return new CajaChips(this);
@@ -36,13 +38,24 @@ public class CajaChipsBuilder implements Builder{
     return listaDeChips;
   }
 
-  public int getNumeroSerie(){
-    int numeroDeSerie;
-    return numeroDeSerie = (codigoDeBarrasValido()) ? Integer.parseInt(codigoDeBarras.substring(12, 18)) : -1;
+  public int getNumeroSerie() {
+    return (codigoDeBarrasValido()) ? Integer.parseInt(codigoDeBarras.substring(12, 18)) : -1;
   }
 
-  public boolean codigoDeBarrasValido(){
+  public boolean codigoDeBarrasValido() {
     return codigoDeBarras.length() == 18 || codigoDeBarras.length() == 19;
   }
 
+  public String getParteAnterior() {
+    return codigoDeBarras.substring(0, 12);
+  }
+
+  public String getPartePosterior() {
+    return codigoDeBarras.length() == 19 ? codigoDeBarras.substring(18) : "";
+  }
+
+  private String generarCodigoBarraCompleto(int numeroSerie) {
+    String numeroSerieFormateado = String.format("%06d", numeroSerie);
+    return getParteAnterior() + numeroSerieFormateado + getPartePosterior();
+  }
 }

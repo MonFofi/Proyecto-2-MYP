@@ -14,13 +14,12 @@ public class Almacenista extends Usuarios{
   }
 
   //registrar caja
-  @Override
-  public void escanearCodigo(String codigo){
+  public void escanearCaja(String codigo){
     cac.registrarCaja(codigo);
   }
 
-  public void asignarChip(){
-    // cac.
+  public void asignarChip(Solicitud s){
+    cac.procesarSolicitud(s);
   }
   
   public void asignarChipsATodos(){

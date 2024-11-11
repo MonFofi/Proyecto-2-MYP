@@ -5,9 +5,12 @@ public class CAC{
     // Chip chip2 = new Chip(124567);
     // Chip chip3 = new Chip(234567);
     // Chip chip4 = new Chip(345678);
-    // Chip chip5 = new Chip(456789);
+    Chip chip5 = new Chip("8952020224390939011");
     Almacenista a = new Almacenista("si", "123");
+    Vendedor v = new Vendedor("Ola", "666");
 
+    // chip5.mostrarChip();
+    // System.out.println(chip5.getCodigoDeBarras());
     /**
      * pruebas de state 
      */
@@ -45,7 +48,13 @@ public class CAC{
       // caja2.mostrarCaja();
 
 
-    a.escanearCodigo("895202002419499801");
-    a.verChipsRegistrados();
+    a.escanearCaja("8952020024194998016");
+    // a.escanearCaja("8952020224390939011");
+    // a.verChipsRegistrados();
+    Solicitud s = v.hacerSolicitud();
+    a.asignarChip(s);
+    v.mostrarDisponibles();
+
+
   }
 }

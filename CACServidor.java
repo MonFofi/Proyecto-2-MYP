@@ -52,24 +52,17 @@ public class CACServidor{
     return solicitudes.iterator();
   }
 
-  /**Servidor
-   * + Registrar cajas °
-   * + recibir solicitud °
-   * + almacenar solicitud °
-   * + procesar una solicitud (asignar chips) °
-   * + procesar todas las solicitudes (asignar chips) °
-   * + Mostrar solicitudes °
-   * + Mostrar chips (por estados) °
-   * + cambiar chips de estado
-   */
+  /**
+   * ********************************************** Métodos para server **********************************************
+   */  
   public void iniciarSesion(){
 
   }
 
 
   /**
-   * Metodos para almacen
-   */
+   * ********************************************** Métodos para almacen **********************************************
+   */  
   //registrar caja
   public void registrarCaja(String codigo){
     CajaChips caja = new CajaChipsBuilder().setListaDeChips(chipsRegistrados).setCodigoDeBarras(codigo).construir();
@@ -89,7 +82,7 @@ public class CACServidor{
       int chipsAsignados = 0;
       while (iteradorChips.hasNext() && chipsAsignados < cantidadSolicitada) {
         Chip chipAsignado = iteradorChips.next();
-        vendedor.chipsDisponibles.agregarChip(chipAsignado);
+        vendedor.getChipsDisponibles().agregarChip(chipAsignado);
         chipsDisponibles.agregarChip(chipAsignado);
         chipsAsignados++;
         iteradorChips.remove();
@@ -161,20 +154,73 @@ public class CACServidor{
     System.out.println("\n*** Chips vendidos: ***");
     getChipsDisponibles().mostrarChips();
   }
-
-
-  /**Vendedores
-   * + hacer solicitud
-   * + escanear chip (cambiarlo de estado)
-   * + vender chip
-   * + reservar chip
-   * + cancelar reservacion
-   */
-
+  
 
   /**
-   * Métodos para vendedores
-   */
+   * ********************************************** Métodos para vendedores **********************************************
+   */  
+  //auxiliar
+  public Chip escanearChip(String c, Vendedor v){
+    Chip chip = null;
+    ListaDeChips lista = v.getChipsDisponibles();
+    Iterator<Chip> i = lista.getIteratorChips();
+    while(i.hasNext()){
+      Chip tempChip = i.next();
+      if (tempChip.getCodigoDeBarras().equals(c)) {
+        chip = tempChip;
+        break;
+      }
+    }
+    if (chip == null) {
+      System.out.println("Chip no encontrado.");
+    }
+    return chip;
+  }
 
+  public void pasarADisponible(Chip c, Vendedor v){
+    if (c.getEstadoActual() instanceof EstadoReservado) {
+      c.estadoDisponible();      
+      v.getChipsDisponibles().agregarChip(c);
+      v.getChipsReservados().eliminarChip(c);      
+      this.getChipsDisponibles().agregarChip(c);
+      this.getChipsReservados().eliminarChip(c);
+      System.out.println("Chip " + c.getCodigoDeBarras() + " se ha pasado cancelado su reservación.");
+    } else {
+      System.out.println("El chip no está reservado.");
+    }
+  }
+
+  public void pasarAReservado(Chip c, Vendedor v){
+    if (c.getEstadoActual() instanceof EstadoDisponible) {
+      c.estadoReservado();
+      v.getChipsReservados().agregarChip(c);
+      v.getChipsDisponibles().eliminarChip(c);
+      this.getChipsReservados().agregarChip(c);
+      this.getChipsDisponibles().eliminarChip(c);
+      System.out.println("Chip " + c.getCodigoDeBarras() + " ha sido reservado.");
+    } else {
+      System.out.println("El chip no está disponible para ser reservado.");
+    }
+  }
+
+  public void pasarAVendido(Chip c, Vendedor v){
+    if (c.getEstadoActual() instanceof EstadoDisponible) {
+      c.estadoVendido();      
+      v.getChipsVendidos().agregarChip(c);
+      v.getChipsDisponibles().eliminarChip(c);      
+      this.getChipsVendidos().agregarChip(c);
+      this.getChipsDisponibles().eliminarChip(c);
+      System.out.println("Chip " + c.getCodigoDeBarras() + " ha sido vendido.");
+    } else if (c.getEstadoActual() instanceof EstadoReservado) {
+      c.estadoVendido();
+      v.getChipsReservados().eliminarChip(c);
+      v.getChipsVendidos().agregarChip(c);
+      this.getChipsReservados().eliminarChip(c);
+      this.getChipsVendidos().agregarChip(c);
+      System.out.println("Chip " + c.getCodigoDeBarras() + " ha sido vendido desde la reserva.");
+    } else {
+      System.out.println("El chip ya ha sido vendido.");
+    }
+  }
 
 }

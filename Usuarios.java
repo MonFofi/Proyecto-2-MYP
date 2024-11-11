@@ -11,7 +11,7 @@ public abstract class Usuarios{
   }
 
   public void inicializarServidor(){
-    this.cac = CACServidor.getServidor();  // Ahora podemos acceder a la instancia única
+    this.cac = CACServidor.getServidor();
   }
 
   public String getNombre(){
@@ -26,12 +26,8 @@ public abstract class Usuarios{
     return iD;
   }
 
-  public abstract void escanearCodigo(String codigo);
-  // public abstract void solicitudDeChips();
-  
   public void cerrarSesion(){
     System.out.println("Cerrando sesión de " + nombre);
   }
-
 
 }

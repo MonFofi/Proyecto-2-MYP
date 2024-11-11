@@ -12,6 +12,10 @@ public class ListaDeChips{
     listaDeChips.add(chip);
   }
 
+  public void eliminarChip(Chip chip){
+    listaDeChips.remove(chip);
+  }
+
   public Iterator<Chip> getIteratorChips(){
     return listaDeChips.iterator();
   }
@@ -32,13 +36,7 @@ public class ListaDeChips{
   }  
 
   public boolean contiene(Chip chip){
-    Iterator iterator = getIteratorChips();
-    while (iterator.hasNext()) {
-      if(chip.equals(iterator.next())){
-        return true;
-      }
-    }
-    return false;
+    return listaDeChips.contains(chip);
   }
 
 }

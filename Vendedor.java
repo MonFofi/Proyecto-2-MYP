@@ -1,8 +1,8 @@
 public class Vendedor extends Usuarios{
 
-  public ListaDeChips chipsDisponibles = new ListaDeChips();
-  public ListaDeChips chipsReservados = new ListaDeChips();
-  public ListaDeChips chipsVendidos = new ListaDeChips();
+  private ListaDeChips chipsDisponibles = new ListaDeChips();
+  private ListaDeChips chipsReservados = new ListaDeChips();
+  private ListaDeChips chipsVendidos = new ListaDeChips();
   public int chipsSolicitados;
   // public Solicitud solicitud;
 
@@ -12,9 +12,36 @@ public class Vendedor extends Usuarios{
     inicializarServidor();
   }
 
-  @Override
-  public void escanearCodigo(String codigo){
-    System.out.println("si");
+  //auxiliar
+  public Chip escanearCodigo(String codigo){
+    return cac.escanearChip(codigo, this);
+  }
+
+  public void cambiarADisponible(String codigo){
+    Chip c = escanearCodigo(codigo);
+    if(c != null){
+      cac.pasarADisponible(c, this);
+    } else {
+      System.out.println("El chip no se encuentra en el sistema.");
+    }
+  }
+
+  public void cambiarAReservado(String codigo){
+    Chip c = escanearCodigo(codigo);
+    if(c != null){
+      cac.pasarAReservado(c, this);
+    } else {
+      System.out.println("El chip no se encuentra en el sistema.");
+    }
+  }
+
+  public void cambiarAVendido(String codigo){
+    Chip c = escanearCodigo(codigo);
+    if(c != null){
+      cac.pasarAVendido(c, this);
+    } else {
+      System.out.println("El chip no se encuentra en el sistema.");
+    }
   }
 
   public Solicitud hacerSolicitud(){
@@ -30,4 +57,29 @@ public class Vendedor extends Usuarios{
     chipsSolicitados = 20 - chipsActuales;
     return chipsSolicitados;
   }
+
+  public ListaDeChips getChipsDisponibles(){
+    return chipsDisponibles;
+  }
+
+  public ListaDeChips getChipsReservados(){
+    return chipsReservados;
+  }
+
+  public ListaDeChips getChipsVendidos(){
+    return chipsVendidos;
+  }
+
+  public void mostrarDisponibles(){
+    chipsDisponibles.mostrarChips();
+  }
+
+  public void mostrarReservados(){
+    chipsReservados.mostrarChips();
+  }
+
+  public void mostrarVendidos(){
+    chipsVendidos.mostrarChips();
+  }
+  
 }
