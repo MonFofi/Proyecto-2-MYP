@@ -124,9 +124,16 @@ public class CACServidor{
 
   //imprimir solicitudes
   public void mostrarSolicitudes(){
-    Iterator<Solicitud> i = getIteratorSolicitudes();
-    while(i.hasNext()){
-      System.out.println(i.next().solicitarChips());
+    if(!solicitudes.isEmpty()){
+      Iterator<Solicitud> i = getIteratorSolicitudes();
+      int contador = 1;
+      while(i.hasNext()){
+        String soli = i.next().solicitarChips();
+        System.out.println(contador + ". " + soli);
+        contador++;
+      }
+    } else {
+      System.out.println("No se ha hecho ninguna solicitud.");
     }
   }
 
@@ -162,12 +169,21 @@ public class CACServidor{
   //auxiliar
   public Chip escanearChip(String c, Vendedor v){
     Chip chip = null;
-    ListaDeChips lista = v.getChipsDisponibles();
-    Iterator<Chip> i = lista.getIteratorChips();
+    ListaDeChips disponibles = v.getChipsDisponibles();
+    Iterator<Chip> i = disponibles.getIteratorChips();
     while(i.hasNext()){
-      Chip tempChip = i.next();
-      if (tempChip.getCodigoDeBarras().equals(c)) {
-        chip = tempChip;
+      Chip temp1 = i.next();
+      if (temp1.getCodigoDeBarras().equals(c)) {
+        chip = temp1;
+        break;
+      }
+    }
+    ListaDeChips reservados = v.getChipsReservados();
+    Iterator<Chip> t = reservados.getIteratorChips();
+    while(t.hasNext()){
+      Chip temp2 = t.next();
+      if (temp2.getCodigoDeBarras().equals(c)) {
+        chip = temp2;
         break;
       }
     }

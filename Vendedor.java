@@ -12,6 +12,47 @@ public class Vendedor extends Usuarios{
     inicializarServidor();
   }
 
+  //metodo propio de la clase (auxiliar)  
+  public int chipsFaltantes(){
+    int chipsActuales = chipsDisponibles.getLongitud();
+    if(chipsActuales >= 20){
+      return 0;
+    }
+    chipsSolicitados = 20 - chipsActuales;
+    return chipsSolicitados;
+  }
+
+  public ListaDeChips getChipsDisponibles(){
+    return chipsDisponibles;
+  }
+
+  public ListaDeChips getChipsReservados(){
+    return chipsReservados;
+  }
+
+  public ListaDeChips getChipsVendidos(){
+    return chipsVendidos;
+  }
+
+  public void mostrarDisponibles(){
+    System.out.println("\nChips disponibles para venta o reservación:");
+    chipsDisponibles.mostrarChips();
+  }
+
+  public void mostrarReservados(){
+    System.out.println("\nChips reservados:");
+    chipsReservados.mostrarChips();
+  }
+
+  public void mostrarVendidos(){
+    System.out.println("\nChips vendidos:");
+    chipsVendidos.mostrarChips();
+  }
+
+  public Solicitud hacerSolicitud(){
+    return new Solicitud(this);
+  }
+  
   //auxiliar
   public Chip escanearCodigo(String codigo){
     return cac.escanearChip(codigo, this);
@@ -44,42 +85,5 @@ public class Vendedor extends Usuarios{
     }
   }
 
-  public Solicitud hacerSolicitud(){
-    return new Solicitud(this);
-  }
-
-  //metodo propio de la clase (auxiliar)  
-  public int chipsFaltantes(){
-    int chipsActuales = chipsDisponibles.getLongitud();
-    if(chipsActuales >= 20){
-      return 0;
-    }
-    chipsSolicitados = 20 - chipsActuales;
-    return chipsSolicitados;
-  }
-
-  public ListaDeChips getChipsDisponibles(){
-    return chipsDisponibles;
-  }
-
-  public ListaDeChips getChipsReservados(){
-    return chipsReservados;
-  }
-
-  public ListaDeChips getChipsVendidos(){
-    return chipsVendidos;
-  }
-
-  public void mostrarDisponibles(){
-    chipsDisponibles.mostrarChips();
-  }
-
-  public void mostrarReservados(){
-    chipsReservados.mostrarChips();
-  }
-
-  public void mostrarVendidos(){
-    chipsVendidos.mostrarChips();
-  }
   
 }

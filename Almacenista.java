@@ -30,6 +30,10 @@ public class Almacenista extends Usuarios{
     cac.mostrarSolicitudes();
   }
 
+  public void solicitudRecibida(Solicitud s){
+    cac.recibirSolicitud(s);
+  }
+
   public void verChipsRegistrados(){
     cac.mostrarRegistrados();
   }  

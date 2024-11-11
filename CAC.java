@@ -1,60 +1,67 @@
 public class CAC{
   public static void main(String[] args) {
 
-    // Chip chip1 = new Chip(123456);
-    // Chip chip2 = new Chip(124567);
-    // Chip chip3 = new Chip(234567);
-    // Chip chip4 = new Chip(345678);
     Chip chip5 = new Chip("8952020224390939011");
     Almacenista a = new Almacenista("si", "123");
     Vendedor v = new Vendedor("Ola", "666");
 
-    // chip5.mostrarChip();
-    // System.out.println(chip5.getCodigoDeBarras());
-    /**
-     * pruebas de state 
-     */
-    // chip1.estadoReservado()
-    // chip1.estadoDisponible();
-    // chip1.estadoReservado();
-    // chip1.estadoCancelado();
-    // chip1.estadoVendido();
-    // chip1.confirmarVenta();
 
-    /**
-     * pruebas de builder
-     */
+   //Codigos con 19 digitos:
+    //Numero con un cero al inicio. ("8952020224390939011")
+    //Numero que inicia en ceros al inicio. ("8952020224390000001")
+    //Numero con varios ceros al inicio. ("8952020224390000111")
+   //Numeros con 18 digitos. ("895202022499860801")
+    //Numero con ceros al inicio.("895202022400860801")
+    //Numero sin ceros al inicio. ("895202002419499801")
 
-    //prueba con un cero al inicio. Imprime 6 dígitos correctamente
-      // ListaDeChips lista1 = new ListaDeChips();
-      // CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390939011").construir();
-      // caja1.mostrarCaja();
-
-    // prueba con un cero al inicio. Imprime 6 dígitos correctamente
-      // ListaDeChips lista1 = new ListaDeChips();
-      // CajaChips caja1 = new CajaChipsBuilder().setListaDeChips(lista1).setCodigoDeBarras("8952020224390000001").construir();
-      // caja1.mostrarCaja();
-
-      
-
-    //prueba con más de un 0 al inicio. Imprime 6 dígitos correctamente
-      // ListaDeChips lista3 = new ListaDeChips();
-      // CajaChips caja3 = new CajaChipsBuilder().setListaDeChips(lista3).setCodigoDeBarras("8952020224390000111").construir();
-      // caja3.mostrarCaja();
-
-    //prueba con numero con primer dígito distinto de 0. Imprime 6 dígitos correctamente
-      // ListaDeChips lista2 = new ListaDeChips();
-      // CajaChips caja2 = new CajaChipsBuilder().setListaDeChips(lista2).setCodigoDeBarras("895202002419499801").construir();
-      // caja2.mostrarCaja();
-
-
+    //Se registra una caja (o dos)
     a.escanearCaja("8952020024194998016");
     // a.escanearCaja("8952020224390939011");
-    // a.verChipsRegistrados();
-    Solicitud s = v.hacerSolicitud();
-    a.asignarChip(s);
-    v.mostrarDisponibles();
 
+    //se crea una solicitud
+    Solicitud s = v.hacerSolicitud();
+
+    //se guarda la solicitud en una lista
+    a.solicitudRecibida(s);
+
+    //El almacen revisa cuantas solicitudes tiene
+    a.verSolicitudes();
+
+    //se asigna chip a una solicitud en específico
+    a.asignarChip(s);
+
+    //el vendedor consulta sus chips disponibles 
+    // v.mostrarDisponibles();
+    System.out.println("");
+    
+    //el almacen consulta los chips disponibles en el sistema para asignar.
+    a.verChipsRegistrados();
+    System.out.println("");
+
+    //el almacen consulta los chips disponibles ya asignados a vendedores.
+    a.verChipsDisponibles();
+
+    //se reserva un chip y se imprime la lista de disponibles y de disponibles para 
+    //corroborar que su estado cambia correctamente así como corroborar el
+    //cambio correcto de lista en la que se encuentra.
+    v.cambiarAReservado("8952020024194998036");
+    v.mostrarDisponibles();
+    System.out.println("");
+    v.mostrarReservados();
+    System.out.println("");
+    
+    //Se vende el chip y se vuelven a imprimir las listas del vendedor para
+    //corroborar que se haya vendido correctamente
+    v.cambiarAVendido("8952020024194998036");
+    v.mostrarDisponibles();
+    v.mostrarReservados();
+    v.mostrarVendidos();
+
+
+    //impresion de listas del almacen (!es aqui donde se ve el error de las listas del server que les digo!)
+    a.verChipsDisponibles();
+    a.verChipsReservados();
+    a.verChipsVendidos();
 
   }
 }
