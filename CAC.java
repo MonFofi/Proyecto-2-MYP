@@ -31,7 +31,7 @@ public class CAC{
     a.asignarChip(s);
 
     //el vendedor consulta sus chips disponibles 
-    // v.mostrarDisponibles();
+    v.mostrarDisponibles();
     System.out.println("");
     
     //el almacen consulta los chips disponibles en el sistema para asignar.
@@ -41,14 +41,15 @@ public class CAC{
     //el almacen consulta los chips disponibles ya asignados a vendedores.
     a.verChipsDisponibles();
 
-    //se reserva un chip y se imprime la lista de disponibles y de disponibles para 
-    //corroborar que su estado cambia correctamente así como corroborar el
-    //cambio correcto de lista en la que se encuentra.
+    // se reserva un chip y se imprime la lista de disponibles y de disponibles para 
+    // corroborar que su estado cambia correctamente así como corroborar el
+    // cambio correcto de lista en la que se encuentra.
     v.cambiarAReservado("8952020024194998036");
     v.mostrarDisponibles();
     System.out.println("");
     v.mostrarReservados();
     System.out.println("");
+    v.cambiarADisponible("8952020024194998036");
     
     //Se vende el chip y se vuelven a imprimir las listas del vendedor para
     //corroborar que se haya vendido correctamente

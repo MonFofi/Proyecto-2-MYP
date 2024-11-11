@@ -84,8 +84,8 @@ public class CACServidor{
         Chip chipAsignado = iteradorChips.next();
         vendedor.getChipsDisponibles().agregarChip(chipAsignado);
         chipsDisponibles.agregarChip(chipAsignado);
-        chipsAsignados++;
         iteradorChips.remove();
+        chipsAsignados++;
       }
       if (chipsAsignados < cantidadSolicitada) {
         System.out.println("No se pudo asignar la cantidad completa de chips solicitada para el vendedor: " + vendedor.getID());
@@ -153,13 +153,13 @@ public class CACServidor{
   //chips reservados
   public void mostrarReservados(){
     System.out.println("\n*** Chips reservados: ***");
-    getChipsDisponibles().mostrarChips();
+    getChipsReservados().mostrarChips();
   }
 
   //chips vendidos
   public void mostrarVendidos(){
     System.out.println("\n*** Chips vendidos: ***");
-    getChipsDisponibles().mostrarChips();
+    getChipsVendidos().mostrarChips();
   }
   
 
@@ -193,46 +193,46 @@ public class CACServidor{
     return chip;
   }
 
-  public void pasarADisponible(Chip c, Vendedor v){
+  public void pasarADisponible(Chip c, Vendedor v, CACServidor cac){
     if (c.getEstadoActual() instanceof EstadoReservado) {
-      c.estadoDisponible();      
+      c.estadoCancelado();      
       v.getChipsDisponibles().agregarChip(c);
+      cac.getChipsDisponibles().agregarChip(c);
       v.getChipsReservados().eliminarChip(c);      
-      this.getChipsDisponibles().agregarChip(c);
-      this.getChipsReservados().eliminarChip(c);
-      System.out.println("Chip " + c.getCodigoDeBarras() + " se ha pasado cancelado su reservación.");
+      cac.getChipsReservados().eliminarChip(c);
+      System.out.println("Chip " + c.getCodigoDeBarras() + " se ha pasado a disponible desupues de la cancelación de su reservación.");
     } else {
       System.out.println("El chip no está reservado.");
     }
   }
 
-  public void pasarAReservado(Chip c, Vendedor v){
+  public void pasarAReservado(Chip c, Vendedor v, CACServidor cac){
     if (c.getEstadoActual() instanceof EstadoDisponible) {
       c.estadoReservado();
       v.getChipsReservados().agregarChip(c);
+      cac.getChipsReservados().agregarChip(c);
       v.getChipsDisponibles().eliminarChip(c);
-      this.getChipsReservados().agregarChip(c);
-      this.getChipsDisponibles().eliminarChip(c);
+      cac.getChipsDisponibles().eliminarChip(c);
       System.out.println("Chip " + c.getCodigoDeBarras() + " ha sido reservado.");
     } else {
       System.out.println("El chip no está disponible para ser reservado.");
     }
   }
 
-  public void pasarAVendido(Chip c, Vendedor v){
+  public void pasarAVendido(Chip c, Vendedor v, CACServidor cac){
     if (c.getEstadoActual() instanceof EstadoDisponible) {
       c.estadoVendido();      
       v.getChipsVendidos().agregarChip(c);
+      cac.getChipsVendidos().agregarChip(c);
       v.getChipsDisponibles().eliminarChip(c);      
-      this.getChipsVendidos().agregarChip(c);
-      this.getChipsDisponibles().eliminarChip(c);
+      cac.getChipsDisponibles().eliminarChip(c);
       System.out.println("Chip " + c.getCodigoDeBarras() + " ha sido vendido.");
     } else if (c.getEstadoActual() instanceof EstadoReservado) {
       c.estadoVendido();
-      v.getChipsReservados().eliminarChip(c);
       v.getChipsVendidos().agregarChip(c);
-      this.getChipsReservados().eliminarChip(c);
-      this.getChipsVendidos().agregarChip(c);
+      cac.getChipsVendidos().agregarChip(c);
+      v.getChipsReservados().eliminarChip(c);
+      cac.getChipsReservados().eliminarChip(c);
       System.out.println("Chip " + c.getCodigoDeBarras() + " ha sido vendido desde la reserva.");
     } else {
       System.out.println("El chip ya ha sido vendido.");

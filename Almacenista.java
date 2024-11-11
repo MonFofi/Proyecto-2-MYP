@@ -10,7 +10,7 @@ public class Almacenista extends Usuarios{
     inicializarServidor();
     chipsDisponibles = cac.getChipsDisponibles();
     chipsReservados = cac.getChipsReservados();
-    chipsVendidos = cac.getChipsReservados();
+    chipsVendidos = cac.getChipsVendidos();
   }
 
   //registrar caja

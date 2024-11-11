@@ -61,7 +61,7 @@ public class Vendedor extends Usuarios{
   public void cambiarADisponible(String codigo){
     Chip c = escanearCodigo(codigo);
     if(c != null){
-      cac.pasarADisponible(c, this);
+      cac.pasarADisponible(c, this, cac);
     } else {
       System.out.println("El chip no se encuentra en el sistema.");
     }
@@ -70,7 +70,7 @@ public class Vendedor extends Usuarios{
   public void cambiarAReservado(String codigo){
     Chip c = escanearCodigo(codigo);
     if(c != null){
-      cac.pasarAReservado(c, this);
+      cac.pasarAReservado(c, this, cac);
     } else {
       System.out.println("El chip no se encuentra en el sistema.");
     }
@@ -79,7 +79,7 @@ public class Vendedor extends Usuarios{
   public void cambiarAVendido(String codigo){
     Chip c = escanearCodigo(codigo);
     if(c != null){
-      cac.pasarAVendido(c, this);
+      cac.pasarAVendido(c, this, cac);
     } else {
       System.out.println("El chip no se encuentra en el sistema.");
     }

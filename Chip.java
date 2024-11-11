@@ -38,7 +38,7 @@ public class Chip implements Componente{
   }
 
   private String obtenerNumeroSerie(String codigoDeBarras) {
-    return codigoDeBarras.substring(12, 18); // Guardar el número de serie como String
+    return codigoDeBarras.substring(12, 18);
   }
 
   private String obtenerPartePosterior(String codigoDeBarras) {
