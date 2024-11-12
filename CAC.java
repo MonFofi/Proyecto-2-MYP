@@ -15,20 +15,20 @@ public class CAC{
     //Numero sin ceros al inicio. ("895202002419499801")
 
     //Se registra una caja (o dos)
-    a.escanearCaja("8952020024194998016");
+    //a.escanearCaja("8952020024194998016");
     // a.escanearCaja("8952020224390939011");
 
     //se crea una solicitud
-    Solicitud s = v.hacerSolicitud();
+    //Solicitud s = v.hacerSolicitud();
 
     //se guarda la solicitud en una lista
-    a.solicitudRecibida(s);
+    //a.solicitudRecibida(s);
 
     //El almacen revisa cuantas solicitudes tiene
-    a.verSolicitudes();
+    //a.verSolicitudes();
 
     //se asigna chip a una solicitud en específico
-    a.asignarChip(s);
+    //a.asignarChip(s);
 
     //el vendedor consulta sus chips disponibles 
     v.mostrarDisponibles();
@@ -49,11 +49,11 @@ public class CAC{
     System.out.println("");
     v.mostrarReservados();
     System.out.println("");
-    v.cambiarADisponible("8952020024194998036");
+    //v.cambiarADisponible("8952020024194998036");
     
     //Se vende el chip y se vuelven a imprimir las listas del vendedor para
     //corroborar que se haya vendido correctamente
-    v.cambiarAVendido("8952020024194998036");
+    //v.cambiarAVendido("8952020024194998036");
     v.mostrarDisponibles();
     v.mostrarReservados();
     v.mostrarVendidos();
