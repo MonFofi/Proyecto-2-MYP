@@ -1,15 +1,23 @@
 import java.util.HashMap;
 import java.util.Iterator;
 
+/**
+ * 
+ */
 public class HashMapUsuarios{
-  //en el diagrama de clases viene de tipo Usuarios pero no supe si
-  //se refería a otra clase o a la interfaz xd
+
   private HashMap<String, Vendedor> usuarios;
 
+  /**
+   * 
+   */
   public HashMapUsuarios(){
     usuarios = new HashMap<>();
   }
 
+  /**
+   * 
+   */
   public void cargarVendedores() {
     usuarios.put("12345", new Vendedor("Carlos", "12345"));
     usuarios.put("24680", new Vendedor("Andrea", "24680"));
@@ -19,10 +27,16 @@ public class HashMapUsuarios{
     usuarios.put("98653", new Vendedor("Karla", "98653"));
   }
 
+  /**
+   * 
+   */
   public HashMap<String, Vendedor> getHashMap(){
     return usuarios;
   }
 
+  /**
+   * 
+   */
   public Iterator<String> getIteratorUsuarios(){
     return usuarios.keySet().iterator();
   }

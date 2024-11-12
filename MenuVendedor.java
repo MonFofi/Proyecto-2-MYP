@@ -1,14 +1,11 @@
 /**
- * Clase que representa el menú que se mostrará
- * a los vendedores posterior a que inicien sesión
- * que implementa InterfazMenu para poder hacer uso
- * del patrón Strategy.
+ * Clase que representa el menú que se mostrará a los vendedores posterior a que
+ * inicien sesión que implementa InterfazMenu para poder hacer uso del patrón Strategy.
  */
 public class MenuVendedor implements InterfazMenu{
   
   /**
-   * Método que muestra las opciones del menú con
-   * las acciones disponibles para los vendedores.
+   * Método que muestra las opciones del menú con las acciones disponibles para los vendedores.
    * @return Un String con el menú.
    */
   @Override()
@@ -22,8 +19,7 @@ public class MenuVendedor implements InterfazMenu{
   }
 
   /**
-   * Método que da la indicación para poder escanear
-   * un chip y poder registrarlo en el sistema.
+   * Método que da la indicación para poder escanear un chip y poder registrarlo en el sistema.
    * @return Un String con la indicación para registrar un chip.
    */
   @Override

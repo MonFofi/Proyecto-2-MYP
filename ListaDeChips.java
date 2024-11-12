@@ -2,36 +2,61 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * 
+ */
 public class ListaDeChips {
+
     private ArrayList<Chip> listaDeChips;
 
+    /**
+     * 
+     */
     public ListaDeChips() {
         listaDeChips = new ArrayList<>();
         cargarDeJson(); 
     }
 
+    /**
+     * 
+     */
     public void agregarChip(Chip chip) {
         listaDeChips.add(chip);
         guardarAJson(); 
     }
 
+    /**
+     * 
+     */
     public void eliminarChip(Chip chip) {
         listaDeChips.remove(chip);
         guardarAJson(); 
     }
 
+    /**
+     * 
+     */
     public Iterator<Chip> getIteratorChips() {
         return listaDeChips.iterator();
     }
 
+    /**
+     * 
+     */
     public int getLongitud() {
         return listaDeChips.size();
     }
 
+    /**
+     * 
+     */
     public boolean contiene(Chip chip) {
         return listaDeChips.contains(chip);
     }
 
+    /**
+     * 
+     */
     public void mostrarChips() {
         Iterator<Chip> iterator = getIteratorChips();
         int contador = 1;
@@ -43,6 +68,9 @@ public class ListaDeChips {
         }
     }
 
+    /**
+     * 
+     */
     private void guardarAJson() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("ListaDeChips.json"))) {
             writer.write("[");
@@ -58,6 +86,9 @@ public class ListaDeChips {
         }
     }
 
+    /**
+     * 
+     */
     private void cargarDeJson() {
         File file = new File("ListaDeChips.json");
         if (!file.exists()) {
@@ -85,4 +116,5 @@ public class ListaDeChips {
             e.printStackTrace();
         }
     }
+    
 }

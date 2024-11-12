@@ -1,14 +1,11 @@
 /**
- * Clase que representa el menú que se mostrará
- * a los almacenistas posterior a que inicien sesión
- * que implementa InterfazMenu para poder hacer uso
- * del patrón Strategy.
+ * Clase que representa el menú que se mostrará a los almacenistas posterior a que
+ * inicien sesión que implementa InterfazMenu para poder hacer uso del patrón Strategy.
  */
 public class MenuAlmacenista implements InterfazMenu{
   
   /**
-   * Método que muestra las opciones del menú con
-   * las acciones disponibles para los almacenistas.
+   * Método que muestra las opciones del menú con las acciones disponibles para los almacenistas.
    * @return Un String con el menú.
    */
   @Override()
@@ -21,8 +18,7 @@ public class MenuAlmacenista implements InterfazMenu{
   }
 
   /**
-   * Método que da la indicación para poder escanear
-   * una caja de chips y poder registrarla en el sistema.
+   * Método que da la indicación para poder escanear una caja de chips y poder registrarla en el sistema.
    * @return Un String con la indicación para registrar una caja.
    */
   @Override

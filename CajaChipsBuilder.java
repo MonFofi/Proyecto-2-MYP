@@ -1,20 +1,34 @@
 import java.util.LinkedList;
+
+/**
+ * 
+ */
 public class CajaChipsBuilder implements Builder{
+
   private String codigoDeBarras;
   private ListaDeChips listaDeChips;
 
+  /**
+   * 
+   */
   @Override
   public Builder setCodigoDeBarras(String codigoDeBarras){
     this.codigoDeBarras = codigoDeBarras;
     return this;
   }
 
+  /**
+   * 
+   */
   @Override
   public Builder setListaDeChips(ListaDeChips listaDeChips){
     this.listaDeChips = listaDeChips;
     return this;
   }
   
+  /**
+   * 
+   */
   @Override
   public CajaChips construir(){
     int numeroInicial = getNumeroSerie();
@@ -30,32 +44,54 @@ public class CajaChipsBuilder implements Builder{
     return new CajaChips(this);
   }
 
+  /**
+   * 
+   */
   public String getCodigoDeBarras(){
     return codigoDeBarras;
   }
 
+  /**
+   * 
+   */
   public ListaDeChips getListaDeChips(){
     return listaDeChips;
   }
 
+  /**
+   * 
+   */
   public int getNumeroSerie() {
     return (codigoDeBarrasValido()) ? Integer.parseInt(codigoDeBarras.substring(12, 18)) : -1;
   }
 
+  /**
+   * 
+   */
   public boolean codigoDeBarrasValido() {
     return codigoDeBarras.length() == 18 || codigoDeBarras.length() == 19;
   }
 
+  /**
+   * 
+   */
   public String getParteAnterior() {
     return codigoDeBarras.substring(0, 12);
   }
 
+  /**
+   * 
+   */
   public String getPartePosterior() {
     return codigoDeBarras.length() == 19 ? codigoDeBarras.substring(18) : "";
   }
 
+  /**
+   * 
+   */
   private String generarCodigoBarraCompleto(int numeroSerie) {
     String numeroSerieFormateado = String.format("%06d", numeroSerie);
     return getParteAnterior() + numeroSerieFormateado + getPartePosterior();
   }
+
 }
