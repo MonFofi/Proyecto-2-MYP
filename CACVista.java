@@ -269,8 +269,8 @@ public class CACVista implements CACObservador, ActionListener{
 
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {
         viewFrame.setVisible(false);
-        initMenuPrincipalAlmacen();
-        //initMenuPrincipalVendedor();
+        //initMenuPrincipalAlmacen();
+        initMenuPrincipalVendedor();
     }
 
     private void botonSalirSistemaActionPerformed(java.awt.event.ActionEvent evt) {
@@ -481,7 +481,7 @@ public class CACVista implements CACObservador, ActionListener{
         logoCheck = new JLabel();
         viewFrame4.setVisible(true);
 
-        viewFrame4.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        viewFrame4.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         viewFrame4.setSize(new Dimension(800, 300));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 153));
@@ -552,7 +552,7 @@ public class CACVista implements CACObservador, ActionListener{
         numerodeserie = new javax.swing.JTextField();
         viewFrame5.setVisible(true);
 
-        viewFrame5.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        viewFrame5.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         viewFrame5.setSize(new Dimension(800, 400));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 153));
@@ -636,7 +636,7 @@ public class CACVista implements CACObservador, ActionListener{
         numerodeCaja = new javax.swing.JTextField();
         viewFrame6.setVisible(true);
 
-        viewFrame6.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        viewFrame6.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         viewFrame6.setSize(new Dimension(800, 400));
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 153));
