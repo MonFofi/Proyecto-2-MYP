@@ -1,5 +1,7 @@
 public class CAC{
   public static void main(String[] args) {
+    CACModeloInterface model = new CACModelo();
+    ControladorInterface controller = new CACcontrolador(model);
 
     Chip chip5 = new Chip("8952020224390939011");
     Almacenista a = new Almacenista("si", "123");
