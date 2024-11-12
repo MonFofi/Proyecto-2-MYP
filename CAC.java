@@ -15,20 +15,20 @@ public class CAC{
     //Numero sin ceros al inicio. ("895202002419499801")
 
     //Se registra una caja (o dos)
-    //a.escanearCaja("8952020024194998016");
+    a.escanearCaja("8952020024194998016");
     // a.escanearCaja("8952020224390939011");
 
     //se crea una solicitud
-    //Solicitud s = v.hacerSolicitud();
+    Solicitud s = v.hacerSolicitud();
 
     //se guarda la solicitud en una lista
-    //a.solicitudRecibida(s);
+    a.solicitudRecibida(s);
 
     //El almacen revisa cuantas solicitudes tiene
-    //a.verSolicitudes();
+    a.verSolicitudes();
 
     //se asigna chip a una solicitud en específico
-    //a.asignarChip(s);
+    a.asignarChip(s);
 
     //el vendedor consulta sus chips disponibles 
     v.mostrarDisponibles();
@@ -39,7 +39,7 @@ public class CAC{
     System.out.println("");
 
     //el almacen consulta los chips disponibles ya asignados a vendedores.
-    a.verChipsDisponibles();
+    a.mostrarDisponibles();
 
     // se reserva un chip y se imprime la lista de disponibles y de disponibles para 
     // corroborar que su estado cambia correctamente así como corroborar el
@@ -60,9 +60,9 @@ public class CAC{
 
 
     //impresion de listas del almacen (!es aqui donde se ve el error de las listas del server que les digo!)
-    a.verChipsDisponibles();
-    a.verChipsReservados();
-    a.verChipsVendidos();
+    a.mostrarDisponibles();
+    a.mostrarReservados();
+    a.mostrarVendidos();
 
   }
 }

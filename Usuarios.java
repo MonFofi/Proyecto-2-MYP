@@ -26,8 +26,8 @@ public abstract class Usuarios{
     return iD;
   }
 
-  public void cerrarSesion(){
-    System.out.println("Cerrando sesión de " + nombre);
-  }
+  public abstract void mostrarDisponibles();
+  public abstract void mostrarReservados();
+  public abstract void mostrarVendidos();
 
 }

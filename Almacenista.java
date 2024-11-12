@@ -1,5 +1,10 @@
+/**
+ * Clase que representa a un almacenista que puede introducir al sistema
+ * cajas de chips y asignar estos a los vendedores. Hereda de la clase abstracta Usuario.
+ */
 public class Almacenista extends Usuarios{
 
+  
   public ListaDeChips chipsDisponibles;
   public ListaDeChips chipsReservados;
   public ListaDeChips chipsVendidos;
@@ -38,15 +43,18 @@ public class Almacenista extends Usuarios{
     cac.mostrarRegistrados();
   }  
 
-  public void verChipsDisponibles(){
+  @Override
+  public void mostrarDisponibles(){
     cac.mostrarDisponibles();
   }
 
-  public void verChipsReservados(){
+  @Override
+  public void mostrarReservados(){
     cac.mostrarReservados();
   }
 
-  public void verChipsVendidos(){
+  @Override
+  public void mostrarVendidos(){
     cac.mostrarVendidos();
   }
 

@@ -34,16 +34,19 @@ public class Vendedor extends Usuarios{
     return chipsVendidos;
   }
 
+  @Override
   public void mostrarDisponibles(){
     System.out.println("\nChips disponibles para venta o reservación:");
     chipsDisponibles.mostrarChips();
   }
 
+  @Override
   public void mostrarReservados(){
     System.out.println("\nChips reservados:");
     chipsReservados.mostrarChips();
   }
 
+  @Override
   public void mostrarVendidos(){
     System.out.println("\nChips vendidos:");
     chipsVendidos.mostrarChips();
