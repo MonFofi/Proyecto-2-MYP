@@ -108,6 +108,7 @@ public class CACServidor{
    */
   public void registrarCaja(String codigo){
     CajaChips caja = new CajaChipsBuilder().setListaDeChips(chipsRegistrados).setCodigoDeBarras(codigo).construir();
+    System.err.println("--------------------------Los chips se han guardado con exito--------------------------");
   }
 
   /**
@@ -191,15 +192,19 @@ public class CACServidor{
     if(!solicitudes.isEmpty()){
       Iterator<Solicitud> i = getIteratorSolicitudes();
       int contador = 1;
+      System.out.println("------------------Mostrando solicitudes: ------------------");
       while(i.hasNext()){
+        if(i.next()!= null){
         String soli = i.next().solicitarChips();
         System.out.println(contador + ". " + soli);
+        }
         contador++;
       }
     } else {
       System.out.println("No se ha hecho ninguna solicitud.");
     }
   }
+
 
   /**
    * Metodo mostrarRegistrados

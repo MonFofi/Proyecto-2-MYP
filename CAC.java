@@ -8,7 +8,7 @@ public class CAC{
     Vendedor v = new Vendedor("Ola", "666");
 
 
-   //Codigos con 19 digitos:
+   /*//Codigos con 19 digitos:
     //Numero con un cero al inicio. ("8952020224390939011")
     //Numero que inicia en ceros al inicio. ("8952020224390000001")
     //Numero con varios ceros al inicio. ("8952020224390000111")
@@ -28,7 +28,7 @@ public class CAC{
 
     //El almacen revisa cuantas solicitudes tiene
     a.verSolicitudes();
-
+     
     //se asigna chip a una solicitud en específico
     a.asignarChip(s);
 
@@ -65,6 +65,7 @@ public class CAC{
     a.mostrarDisponibles();
     a.mostrarReservados();
     a.mostrarVendidos();
-
+    */
+    //a.mostrarDisponibles();
   }
 }

@@ -66,6 +66,7 @@ public class CACVista implements CACObservador, ActionListener{
     private JTextField numerodeCaja;
     private JLabel subtituloCaja;
     private JLabel tituloEscaneaCod;
+    
 
     public CACVista(ControladorInterface controller, CACModeloInterface model){
         this.controller = controller;
@@ -258,8 +259,20 @@ public class CACVista implements CACObservador, ActionListener{
     }
 
     private void contraseniaTxtActionPerformed(java.awt.event.ActionEvent evt) {
-        System.out.println("Evento detectado: " + evt.getActionCommand());
-        // TODO add your handling code here:
+        //aqui guardaria lo que introduzca el usuario
+        String contrasenia = contraseniaTxt.getText();
+
+        //aqui el modelo mandaria a llamar el metodo de login
+        //model.
+        
+        
+        JFrame frame = new JFrame("Guardar texto en variable");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400,200);
+
+        //esto te despliega un recuadro que dice lo que se guardo, es para checar que se guarde bien, pero al final lo podemos quitar
+        JOptionPane.showMessageDialog(frame, "Texto Guardado" + contrasenia);
+        contraseniaTxt.setText("");
     }
 
     private void usuarioTxtActionPerformed(java.awt.event.ActionEvent evt) {
@@ -298,7 +311,7 @@ public class CACVista implements CACObservador, ActionListener{
 
     //metodo para iniciar el menu del almacen
     public void initMenuPrincipalAlmacen(){        
-        viewFrame2 = new JFrame("Manu Almacen");
+        viewFrame2 = new JFrame("Menu Almacen");
         fondoPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         tituloBienvenidaAlmacen = new javax.swing.JLabel();
@@ -437,11 +450,13 @@ public class CACVista implements CACObservador, ActionListener{
     }
 
     private void botonRevisarSolicitudesActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        // accion cuando se presiona el boton de Revisar Solicitudes
+        model.revisarSolicitudes();
     }
 
     private void botonConsultarChipsActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        // accion cuando se presiona el boton de Consultar Chips
+        model.consultarChips();
     }
 
     private void botonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {
@@ -455,22 +470,11 @@ public class CACVista implements CACObservador, ActionListener{
     }
 
     private void botonRegistrarCajaActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        //boton para abrir el sunmenu de EscanearCaja 
         initSubmenuEscanearCaja();
-    }
-
-    //subemnus de almacen
-    public void initSubmenuRegistrarCaja(){
 
     }
-    
-    public void initSubmenuRevisarSolicitudes(){
-        
-    }
 
-    public void initSubmenuConsultarChips(){
-        
-    }
 
     //subemnus de vendedor
     public void initSubmenuSolicitarChips(){
@@ -706,15 +710,22 @@ public class CACVista implements CACObservador, ActionListener{
         viewFrame6.pack();
         
     }
+    
     private void numerodeCajaActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-    } 
-    /* 
-    public void initSubmenuCancelarReservacion(){
-        
-    }
-    */
+        // metodo cuando se escanea el codigo de barras de la caja
+        String numeroCajaIngresado = numerodeCaja.getText();
 
+        model.registrarCaja(numeroCajaIngresado);
+
+        JFrame frame = new JFrame("Guardar texto en variable");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400,200);
+
+        JOptionPane.showMessageDialog(frame, "Texto Guardado" + numeroCajaIngresado);
+        numerodeCaja.setText("");
+    } 
+    
+    //Menu principal Vendedor
     public void initMenuPrincipalVendedor(){
         viewFrame3 = new JFrame("Manu Vendedor");
         fondoPane = new JPanel();
@@ -868,22 +879,22 @@ public class CACVista implements CACObservador, ActionListener{
     }                   
 
     private void botonVenderChipActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        // TODO add your handling code here:
+        // metodo para cuando se presiona el boton Vender Chip, que abre el submenu para escanear el codigo de barras del chip
         initSubmenuEscanearChip();
     }                                               
 
     private void botonReservarChipActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // TODO add your handling code here:
+        // metodo para cuando se presiona el boton Reservar Chip, que abre el submenu para escanear el codigo de barras del chip
         initSubmenuEscanearChip();
     }                                                                                                  
 
     private void botonSolicitarChipsActionPerformed(java.awt.event.ActionEvent evt) {                                                    
-        // TODO add your handling code here:
-        initSubmenuSolicitarChips();
+       // metodo para solicitar chips al almacen
+        model.solicitarMasChips();
     }                                                   
 
     private void botonCancelarReservacionActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
+        // metodo para cuando se presiona el boton Cancelar Reservacion de chip, que abre el submenu para escanear el codigo de barras del chip
         initSubmenuEscanearChip();
     }
     
