@@ -1,15 +1,15 @@
 import java.util.ArrayList;
 
 public class CACModelo implements CACModeloInterface{
-    ArrayList<CACObservador> cacObservadores = new ArrayList<CACObservador>();
-	Almacenista almacenista;
-	Vendedor vendedor;
-	Solicitud s;
-	String codigo;
-	String usuarioValido = "Carlos";
-	String contrasenaValida = "98765432";
-	String usuarioValido2 = "Rodrigo";
-	String contrasenaValida2 = "12345678";
+    private ArrayList<CACObservador> cacObservadores = new ArrayList<CACObservador>();
+	private Almacenista almacenista;
+	private Vendedor vendedor;
+	private Solicitud s;
+	private String codigo;
+	private String usuarioValido = "Carlos";
+	private String contrasenaValida = "98765432";
+	private String usuarioValido2 = "Rodrigo";
+	private String contrasenaValida2 = "12345678";
 
 	public CACModelo(){
 		vendedor = new Vendedor(usuarioValido2, contrasenaValida2);
@@ -17,10 +17,6 @@ public class CACModelo implements CACModeloInterface{
 	}
 
 	public String iniciarSesion(String usuario, String contrasenia){
-		/* Usuarios u = servidor.getUsuarios().obtenerUsuario(usuario);
-		if(u != null && u.getContrasena().equals(contrasenia)){
-			return u.getRol();
-		} */
 		if(usuario.equals(usuarioValido) && contrasenia.equals(contrasenaValida)){
 			return "vendedor";
 		} else if (usuario.equals(usuarioValido2) && contrasenia.equals(contrasenaValida2)){
