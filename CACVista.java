@@ -281,9 +281,19 @@ public class CACVista implements CACObservador, ActionListener{
     }
 
     private void botonIngresarActionPerformed(java.awt.event.ActionEvent evt) {
-        viewFrame.setVisible(false);
-        //initMenuPrincipalAlmacen();
-        initMenuPrincipalVendedor();
+        //metodo para abrir el menu dependiendo el usuario
+        String usuario = usuarioTxt.getText();
+        String contrasenia = contraseniaTxt.getText();
+        String rol = model.iniciarSesion(usuario, contrasenia);
+
+        if(!rol.equals("")){
+          viewFrame.setVisible(false);
+          if(rol.equalsIgnoreCase("almacenista")){
+            initMenuPrincipalAlmacen();
+          }else if(rol.equalsIgnoreCase("vendedor")){
+            initMenuPrincipalVendedor();
+          }
+        }
     }
 
     private void botonSalirSistemaActionPerformed(java.awt.event.ActionEvent evt) {

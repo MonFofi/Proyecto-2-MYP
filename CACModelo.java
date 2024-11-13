@@ -6,15 +6,27 @@ public class CACModelo implements CACModeloInterface{
 	Vendedor vendedor;
 	Solicitud s;
 	String codigo;
+	String usuarioValido = "Carlos";
+	String contrasenaValida = "98765432";
+	String usuarioValido2 = "Rodrigo";
+	String contrasenaValida2 = "12345678";
 
 	public CACModelo(){
-		almacenista = new Almacenista("si", "123");
-    	vendedor = new Vendedor("Ola", "666");
-		
+		vendedor = new Vendedor(usuarioValido2, contrasenaValida2);
+		almacenista = new Almacenista(usuarioValido, contrasenaValida);
 	}
 
-	public void iniciarSesion(){
-
+	public String iniciarSesion(String usuario, String contrasenia){
+		/* Usuarios u = servidor.getUsuarios().obtenerUsuario(usuario);
+		if(u != null && u.getContrasena().equals(contrasenia)){
+			return u.getRol();
+		} */
+		if(usuario.equals(usuarioValido) && contrasenia.equals(contrasenaValida)){
+			return "vendedor";
+		} else if (usuario.equals(usuarioValido2) && contrasenia.equals(contrasenaValida2)){
+			return "almacenista";
+		}
+		return "";
 	}
 
     public void registrarCaja(String codigo){

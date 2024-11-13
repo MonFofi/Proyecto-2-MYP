@@ -1,5 +1,5 @@
 public interface CACModeloInterface{
-    void iniciarSesion();
+    String iniciarSesion(String usuario, String contrasenia);
 
     void registrarCaja(String codigo);
 

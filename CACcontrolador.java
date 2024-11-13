@@ -6,12 +6,6 @@ public class CACcontrolador implements ControladorInterface{
 		this.model = model;
 		vista = new CACVista(this,model);
 		vista.initLogin();
-		/*view.createControls();
-		view.disableStopMenuItem();
-		view.enableStartMenuItem();
-		view.disableChangeBPM();
-    */
-		//model.initialize();
 	}
 	
 }
