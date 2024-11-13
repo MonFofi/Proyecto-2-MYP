@@ -66,7 +66,8 @@ public class CACVista implements CACObservador, ActionListener{
     private JTextField numerodeCaja;
     private JLabel subtituloCaja;
     private JLabel tituloEscaneaCod;
-    
+
+    private JFrame frame;    
 
     public CACVista(ControladorInterface controller, CACModeloInterface model){
         this.controller = controller;
@@ -74,188 +75,186 @@ public class CACVista implements CACObservador, ActionListener{
         model.registrarObservador((CACObservador)this);
     }
     
-    //metodo para iniciar el Login
     public void initLogin(){
+        viewFrame = new JFrame("Login");
+        nombreCAC = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        tituloCAC = new javax.swing.JLabel();
+        botonSalirSistema = new javax.swing.JButton();
+        logoUsuarios = new javax.swing.JLabel();
+        logoInDoor = new javax.swing.JLabel();
+        tituloIS = new javax.swing.JLabel();
+        usuarioLabel = new javax.swing.JLabel();
+        contraseniaTxt = new javax.swing.JTextField();
+        contraseniaLabel = new javax.swing.JLabel();
+        usuarioTxt = new javax.swing.JTextField();
+        botonIngresar = new javax.swing.JButton();
+        viewFrame.setVisible(true);
 
-    viewFrame = new JFrame("Login");
-    nombreCAC = new javax.swing.JPanel();
-    jPanel1 = new javax.swing.JPanel();
-    tituloCAC = new javax.swing.JLabel();
-    botonSalirSistema = new javax.swing.JButton();
-    logoUsuarios = new javax.swing.JLabel();
-    logoInDoor = new javax.swing.JLabel();
-    tituloIS = new javax.swing.JLabel();
-    usuarioLabel = new javax.swing.JLabel();
-    contraseniaTxt = new javax.swing.JTextField();
-    contraseniaLabel = new javax.swing.JLabel();
-    usuarioTxt = new javax.swing.JTextField();
-    botonIngresar = new javax.swing.JButton();
-    viewFrame.setVisible(true);
+        viewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewFrame.setSize(new Dimension(800, 500));
 
-    viewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    viewFrame.setSize(new Dimension(800, 500));
+        nombreCAC.setBackground(new java.awt.Color(255, 255, 255));
+        nombreCAC.setForeground(new java.awt.Color(255, 255, 255));
+        nombreCAC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-    nombreCAC.setBackground(new java.awt.Color(255, 255, 255));
-    nombreCAC.setForeground(new java.awt.Color(255, 255, 255));
-    nombreCAC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 0));
 
-    jPanel1.setBackground(new java.awt.Color(255, 255, 153));
-    jPanel1.setForeground(new java.awt.Color(255, 255, 0));
+        tituloCAC.setFont(new java.awt.Font("URW Bookman", 0, 24));
+        tituloCAC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloCAC.setText("Centro de Atencion a Clientes");
 
-    tituloCAC.setFont(new java.awt.Font("URW Bookman", 0, 24));
-    tituloCAC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    tituloCAC.setText("Centro de Atencion a Clientes");
+        botonSalirSistema.setFont(new java.awt.Font("Cantarell", 0, 18));
+        botonSalirSistema.setText("SALIR DEL SISTEMA");
+        botonSalirSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirSistemaActionPerformed(evt);
+            }
+        });
 
-    botonSalirSistema.setFont(new java.awt.Font("Cantarell", 0, 18));
-    botonSalirSistema.setText("SALIR DEL SISTEMA");
-    botonSalirSistema.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            botonSalirSistemaActionPerformed(evt);
-        }
-    });
+        logoUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("imagenes/users_people_workers_customers_icon_124243.png")));
 
-    logoUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("imagenes/users_people_workers_customers_icon_124243.png")));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-
-    jPanel1Layout.setHorizontalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel1Layout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-            .addComponent(logoUsuarios)
-            .addComponent(tituloCAC, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(botonSalirSistema))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
-    jPanel1Layout.setVerticalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel1Layout.createSequentialGroup()
-            .addGap(92, 92, 92)
-            .addComponent(logoUsuarios)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-            .addComponent(tituloCAC, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(48, 48, 48)
-            .addComponent(botonSalirSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addComponent(logoUsuarios)
+                .addComponent(tituloCAC, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonSalirSistema))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(logoUsuarios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tituloCAC, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
+                .addComponent(botonSalirSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-    logoInDoor.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 24)); 
-    logoInDoor.setIcon(new javax.swing.ImageIcon(getClass().getResource("imagenes/in_door_communication_enter_log_in_login_icon_191647 (1).png"))); 
-    logoInDoor.setText("LOGIN");
+        logoInDoor.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 24)); 
+        logoInDoor.setIcon(new javax.swing.ImageIcon(getClass().getResource("imagenes/in_door_communication_enter_log_in_login_icon_191647 (1).png"))); 
+        logoInDoor.setText("LOGIN");
 
-    tituloIS.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 24)); 
-    tituloIS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-    tituloIS.setText("INICIAR SESION");
+        tituloIS.setFont(new java.awt.Font("Cantarell Extra Bold", 0, 24)); 
+        tituloIS.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloIS.setText("INICIAR SESION");
 
-    usuarioLabel.setFont(new java.awt.Font("Cantarell", 0, 18)); 
-    usuarioLabel.setText("USUARIO");
+        usuarioLabel.setFont(new java.awt.Font("Cantarell", 0, 18)); 
+        usuarioLabel.setText("USUARIO");
 
-    contraseniaTxt.setForeground(new java.awt.Color(204, 204, 204));
-    contraseniaTxt.setText("Ingrese su contraseña");
-    contraseniaTxt.setCaretColor(new java.awt.Color(255, 255, 255));
-    contraseniaTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            contraseniaTxtMousePressed(evt);
-        }
-    });
-    contraseniaTxt.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            contraseniaTxtActionPerformed(evt);
-        }
-    });
+        contraseniaTxt.setForeground(new java.awt.Color(204, 204, 204));
+        contraseniaTxt.setText("Ingrese su contraseña");
+        contraseniaTxt.setCaretColor(new java.awt.Color(255, 255, 255));
+        contraseniaTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                contraseniaTxtMousePressed(evt);
+            }
+        });
+        contraseniaTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contraseniaTxtActionPerformed(evt);
+            }
+        });
 
-    contraseniaLabel.setFont(new java.awt.Font("Cantarell", 0, 18));
-    contraseniaLabel.setText("CONTRASEÑA");
+        contraseniaLabel.setFont(new java.awt.Font("Cantarell", 0, 18));
+        contraseniaLabel.setText("CONTRASEÑA");
 
-    usuarioTxt.setForeground(new java.awt.Color(204, 204, 204));
-    usuarioTxt.setText("Ingrese su nombre de usuario");
-    usuarioTxt.setCaretColor(new java.awt.Color(255, 255, 255));
-    usuarioTxt.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            usuarioTxtMousePressed(evt);
-        }
-    });
-    usuarioTxt.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            usuarioTxtActionPerformed(evt);
-        }
-    });
+        usuarioTxt.setForeground(new java.awt.Color(204, 204, 204));
+        usuarioTxt.setText("Ingrese su nombre de usuario");
+        usuarioTxt.setCaretColor(new java.awt.Color(255, 255, 255));
+        usuarioTxt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                usuarioTxtMousePressed(evt);
+            }
+        });
+        usuarioTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usuarioTxtActionPerformed(evt);
+            }
+        });
 
-    botonIngresar.setBackground(new java.awt.Color(255, 255, 153));
-    botonIngresar.setFont(new java.awt.Font("Cantarell", 0, 18));
-    botonIngresar.setText("INGRESAR");
-    botonIngresar.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            botonIngresarActionPerformed(evt);
-        }
-    });
+        botonIngresar.setBackground(new java.awt.Color(255, 255, 153));
+        botonIngresar.setFont(new java.awt.Font("Cantarell", 0, 18));
+        botonIngresar.setText("INGRESAR");
+        botonIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonIngresarActionPerformed(evt);
+            }
+        });
 
-    javax.swing.GroupLayout nombreCACLayout = new javax.swing.GroupLayout(nombreCAC);
-    nombreCAC.setLayout(nombreCACLayout);
-    nombreCACLayout.setHorizontalGroup(
-        nombreCACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(nombreCACLayout.createSequentialGroup()
-            .addGap(20, 20, 20)
-            .addGroup(nombreCACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(logoInDoor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(nombreCACLayout.createSequentialGroup()
-                    .addGap(100, 100, 100)
-                    .addComponent(tituloIS))
-                .addGroup(nombreCACLayout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(usuarioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(nombreCACLayout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(nombreCACLayout.createSequentialGroup()
-                    .addGap(40, 40, 40)
-                    .addComponent(contraseniaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(nombreCACLayout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(contraseniaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(nombreCACLayout.createSequentialGroup()
-                    .addGap(120, 120, 120)
-                    .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addGap(27, 27, 27)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
-    nombreCACLayout.setVerticalGroup(
-        nombreCACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(nombreCACLayout.createSequentialGroup()
-            .addGap(20, 20, 20)
-            .addComponent(logoInDoor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(40, 40, 40)
-            .addComponent(tituloIS)
-            .addGap(40, 40, 40)
-            .addComponent(usuarioLabel)
-            .addGap(8, 8, 8)
-            .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(40, 40, 40)
-            .addComponent(contraseniaLabel)
-            .addGap(8, 8, 8)
-            .addComponent(contraseniaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(30, 30, 30)
-            .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
+        javax.swing.GroupLayout nombreCACLayout = new javax.swing.GroupLayout(nombreCAC);
+        nombreCAC.setLayout(nombreCACLayout);
+        nombreCACLayout.setHorizontalGroup(
+            nombreCACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nombreCACLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(nombreCACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(logoInDoor, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(nombreCACLayout.createSequentialGroup()
+                        .addGap(100, 100, 100)
+                        .addComponent(tituloIS))
+                    .addGroup(nombreCACLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(usuarioLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(nombreCACLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(nombreCACLayout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(contraseniaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(nombreCACLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(contraseniaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(nombreCACLayout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(27, 27, 27)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        nombreCACLayout.setVerticalGroup(
+            nombreCACLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(nombreCACLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(logoInDoor, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(tituloIS)
+                .addGap(40, 40, 40)
+                .addComponent(usuarioLabel)
+                .addGap(8, 8, 8)
+                .addComponent(usuarioTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(contraseniaLabel)
+                .addGap(8, 8, 8)
+                .addComponent(contraseniaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(botonIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
-    GroupLayout layout = new GroupLayout(viewFrame.getContentPane());
-    viewFrame.getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(nombreCAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
+        GroupLayout layout = new GroupLayout(viewFrame.getContentPane());
+        viewFrame.getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(nombreCAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addContainerGap())
-    );
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(nombreCAC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-    viewFrame.pack();
+        viewFrame.pack();
     }
 
     private void contraseniaTxtActionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,11 +302,11 @@ public class CACVista implements CACObservador, ActionListener{
 
     private void usuarioTxtMousePressed(java.awt.event.MouseEvent evt) {
         if(usuarioTxt.getText().equals("Ingrese su nombre de usuario")){
-        usuarioTxt.setText("");
-    }
-    if(contraseniaTxt.getText().isEmpty()){
-        contraseniaTxt.setText("Ingrese su contraseña");
-    }
+            usuarioTxt.setText("");
+        }
+        if(contraseniaTxt.getText().isEmpty()){
+            contraseniaTxt.setText("Ingrese su contraseña");
+        }
     }
     
     private void contraseniaTxtMousePressed(java.awt.event.MouseEvent evt) {
@@ -315,11 +314,10 @@ public class CACVista implements CACObservador, ActionListener{
         contraseniaTxt.setText("");
         }
         if(usuarioTxt.getText().isEmpty()){
-    usuarioTxt.setText("Ingrese su nombre de usuario");
+        usuarioTxt.setText("Ingrese su nombre de usuario");
         }
     }
 
-    //metodo para iniciar el menu del almacen
     public void initMenuPrincipalAlmacen(){        
         viewFrame2 = new JFrame("Menu Almacen");
         fondoPanel = new javax.swing.JPanel();
@@ -484,9 +482,6 @@ public class CACVista implements CACObservador, ActionListener{
         initSubmenuEscanearCaja();
 
     }
-
-
-    //subemnus de vendedor
     public void initSubmenuSolicitarChips(){
         viewFrame4 = new JFrame("Solicitud");
         jPanel4 = new JPanel();
@@ -636,7 +631,6 @@ public class CACVista implements CACObservador, ActionListener{
         viewFrame5.pack();
     }
 
-    private JFrame frame;
     private void numerodeserieActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // aqui iria la logica para el escaner de barras.
         String numeroChipIngresado = numerodeserie.getText();
@@ -766,7 +760,6 @@ public class CACVista implements CACObservador, ActionListener{
         numerodeCaja.setText("");
     } 
     
-    //Menu principal Vendedor
     public void initMenuPrincipalVendedor(){
         viewFrame3 = new JFrame("Manu Vendedor");
         fondoPane = new JPanel();
@@ -939,10 +932,8 @@ public class CACVista implements CACObservador, ActionListener{
         initSubmenuEscanearChip();
     }
     
-
-  public void actionPerformed(ActionEvent event){
-    //se escanea la caja y le dice al controlador¿
-    System.out.println("Evento no identificado: " + event.getActionCommand());
+    public void actionPerformed(ActionEvent event){
+        System.out.println("Evento no identificado: " + event.getActionCommand());
     }
 
     @Override
