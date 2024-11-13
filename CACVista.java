@@ -626,8 +626,39 @@ public class CACVista implements CACObservador, ActionListener{
         viewFrame5.pack();
     }
 
+    private JFrame frame;
     private void numerodeserieActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // aqui iria la logica para el escaner de barras.
+        String numeroChipIngresado = numerodeserie.getText();
+
+        Chip chip = model.escanerChip(numeroChipIngresado);
+
+        frame = new JFrame("Guardar texto en variable");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400,200);
+
+        JOptionPane.showMessageDialog(frame, "Texto Guardado" + numeroChipIngresado);
+        numerodeserie.setText("");
+
+        // Dependiendo del estado actual del chip, se realiza la acción correspondiente
+        if (chip.getEstadoActual() instanceof EstadoDisponible) {
+            // El chip está disponible, lo pasamos a reservado
+            model.reservarChip(numeroChipIngresado);
+        } else if (chip.getEstadoActual() instanceof EstadoReservado) {
+            // El chip está reservado, lo pasamos a disponible
+            model.cancelarReservacionChip(numeroChipIngresado);
+        } else if (chip.getEstadoActual() instanceof EstadoDisponible) {
+            // El chip ya está vendido
+            model.venderChip(numeroChipIngresado);
+            System.out.println("El chip ya ha sido vendido. No se puede realizar ninguna otra acción.");
+        } else {
+            // Si el estado del chip no es reconocido
+            System.out.println("Estado del chip desconocido. No se puede procesar.");
+        }
+
+        // Limpiar el campo de texto
+        numerodeserie.setText("");
+        
     } 
 
 

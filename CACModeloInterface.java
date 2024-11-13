@@ -6,16 +6,20 @@ public interface CACModeloInterface{
     void revisarSolicitudes();
 
     void consultarChips();
+    
+    Chip escanerChip(String codigo);
 
     void solicitarMasChips();
 
-    void venderChip();
+    void venderChip(String codigo);
 
-    void reservarChip();
+    void reservarChip(String codigo);
 
-    void cancelarReservacionChip();
+    void cancelarReservacionChip(String codigo);
     
     void registrarObservador(CACObservador o);
+
+    void notificarCACObservadores();
   
 	void removerObservador(CACObservador o);
 }

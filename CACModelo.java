@@ -5,6 +5,7 @@ public class CACModelo implements CACModeloInterface{
 	Almacenista almacenista;
 	Vendedor vendedor;
 	Solicitud s;
+	String codigo;
 
 	public CACModelo(){
 		almacenista = new Almacenista("si", "123");
@@ -37,20 +38,26 @@ public class CACModelo implements CACModeloInterface{
 
     public void solicitarMasChips(){
 		s = vendedor.hacerSolicitud();
+		System.out.println("Se han solicitado exitosamente mas chips");
 
 	}
 
-    public void venderChip(){
+	public Chip escanerChip(String codigo){
+		Chip chip = vendedor.escanearCodigo(codigo);
+		return chip;
+	}
 
+    public void venderChip(String codigo){
+		vendedor.cambiarAVendido(codigo);
 
 	}
 
-    public void reservarChip(){
-
+    public void reservarChip(String codigo){
+		vendedor.cambiarAReservado(codigo);
 	}
 
-    public void cancelarReservacionChip(){
-
+    public void cancelarReservacionChip(String codigo){
+		vendedor.cambiarADisponible(codigo);
 	}
 
     public void registrarObservador(CACObservador o) {
