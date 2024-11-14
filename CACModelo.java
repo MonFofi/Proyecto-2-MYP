@@ -5,7 +5,6 @@ public class CACModelo implements CACModeloInterface{
 	private Almacenista almacenista;
 	private Vendedor vendedor;
 	private Solicitud s;
-	private String codigo;
 	private String usuarioValido = "Carlos";
 	private String contrasenaValida = "98765432";
 	private String usuarioValido2 = "Rodrigo";

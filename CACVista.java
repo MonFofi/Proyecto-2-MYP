@@ -34,10 +34,8 @@ public class CACVista implements CACObservador, ActionListener{
 
     //atributos del MenuPrincipalVendedor
     private JFrame viewFrame3;
-    private JButton botonCancelarReservacion;
-    private JButton botonReservarChip;
     private JButton botonSolicitarChips;
-    private JButton botonVenderChip;
+    private JButton botonOpcionesChip;
     private JPanel fondoPane;
     private JPanel jPanel3;
     private JLabel logoVendedor;
@@ -631,38 +629,71 @@ public class CACVista implements CACObservador, ActionListener{
         viewFrame5.pack();
     }
 
-    private void numerodeserieActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        // aqui iria la logica para el escaner de barras.
-        String numeroChipIngresado = numerodeserie.getText();
-
-        Chip chip = model.escanerChip(numeroChipIngresado);
-
+    private void numerodeserieActionPerformed(java.awt.event.ActionEvent evt) {  
+        String numeroChipIngresado = numerodeserie.getText(); 
+        Chip chip = model.escanerChip(numeroChipIngresado);                                           
+        
         frame = new JFrame("Guardar texto en variable");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400,200);
-
-        JOptionPane.showMessageDialog(frame, "Texto Guardado" + numeroChipIngresado);
+        frame.setSize(400, 200);
+        
+        // Mostrar un mensaje de confirmación
+        JOptionPane.showMessageDialog(frame, "Texto Guardado: " + numeroChipIngresado);
         numerodeserie.setText("");
-
-        // Dependiendo del estado actual del chip, se realiza la acción correspondiente
+        
+        // Manejo de estados utilizando los tres métodos de los estados de los chips
         if (chip.getEstadoActual() instanceof EstadoDisponible) {
-            // El chip está disponible, lo pasamos a reservado
-            model.reservarChip(numeroChipIngresado);
+            // El chip está disponible, permitir reservar o vender
+            int opcion = JOptionPane.showOptionDialog(
+                frame,
+                "El chip está disponible. ¿Qué acción deseas realizar?",
+                "Opciones para Chip Disponible",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"Reservar", "Vender"},
+                "Reservar"
+            );
+        
+            if (opcion == JOptionPane.YES_OPTION) {
+                // Opción 'Reservar'
+                model.reservarChip(numeroChipIngresado);
+            } else if (opcion == JOptionPane.NO_OPTION) {
+                // Opción 'Vender'
+                model.venderChip(numeroChipIngresado);
+            }
+        
         } else if (chip.getEstadoActual() instanceof EstadoReservado) {
-            // El chip está reservado, lo pasamos a disponible
-            model.cancelarReservacionChip(numeroChipIngresado);
-        } else if (chip.getEstadoActual() instanceof EstadoDisponible) {
-            // El chip ya está vendido
-            model.venderChip(numeroChipIngresado);
+            // El chip está reservado, permitir cancelar la reservación o vender
+            int opcion = JOptionPane.showOptionDialog(
+                frame,
+                "El chip está reservado. ¿Qué acción deseas realizar?",
+                "Opciones para Chip Reservado",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new Object[]{"Vender", "Cancelar Reservación"},
+                "Vender"
+            );
+        
+            if (opcion == JOptionPane.YES_OPTION) {
+                // Opción 'Vender'
+                model.venderChip(numeroChipIngresado);
+            } else if (opcion == JOptionPane.NO_OPTION) {
+                // Opción 'Cancelar Reservación'
+                model.cancelarReservacionChip(numeroChipIngresado);
+            }
+        
+        } else if (chip.getEstadoActual() instanceof EstadoVendido) {
             System.out.println("El chip ya ha sido vendido. No se puede realizar ninguna otra acción.");
         } else {
             // Si el estado del chip no es reconocido
             System.out.println("Estado del chip desconocido. No se puede procesar.");
         }
-
-        // Limpiar el campo de texto
-        numerodeserie.setText("");
         
+        
+        // Cerrar el submenú después de procesar
+        viewFrame5.setVisible(false);
     } 
 
 
@@ -767,11 +798,9 @@ public class CACVista implements CACObservador, ActionListener{
         tituloBienvenidaVendedor = new JLabel();
         subtopciones = new JLabel();
         logoVendedor = new JLabel();
-        botonVenderChip = new JButton();
-        botonReservarChip = new JButton();
+        botonOpcionesChip = new JButton();
         botonCerrarSesion = new JButton();
         botonSolicitarChips = new JButton();
-        botonCancelarReservacion = new JButton();
         viewFrame3.setVisible(true);
 
         viewFrame3.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -823,21 +852,14 @@ public class CACVista implements CACObservador, ActionListener{
                         .addGap(26, 26, 26))))
         );
 
-        botonVenderChip.setIcon(new ImageIcon(getClass().getResource("imagenes/pay_cash_payment_money_dollar_bill_icon_143267.png"))); // NOI18N
-        botonVenderChip.setText("Vender chip");
-        botonVenderChip.addActionListener(new java.awt.event.ActionListener() {
+        botonOpcionesChip.setIcon(new ImageIcon(getClass().getResource("imagenes/pay_cash_payment_money_dollar_bill_icon_143267.png"))); // NOI18N
+        botonOpcionesChip.setText("Vender/Reservar/Cancelar chip");
+        botonOpcionesChip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonVenderChipActionPerformed(evt);
+                botonOpcionesChipActionPerformed(evt);
             }
         });
 
-        botonReservarChip.setIcon(new ImageIcon(getClass().getResource("imagenes/4_104853.png"))); // NOI18N
-        botonReservarChip.setText("Reservar chip");
-        botonReservarChip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonReservarChipActionPerformed(evt);
-            }
-        });
 
         botonCerrarSesion.setIcon(new ImageIcon(getClass().getResource("imagenes/4115234-login-sign-in_114046.png"))); // NOI18N
         botonCerrarSesion.setText("Cerrar sesion");
@@ -855,14 +877,6 @@ public class CACVista implements CACObservador, ActionListener{
             }
         });
 
-        botonCancelarReservacion.setIcon(new ImageIcon(getClass().getResource("imagenes/signal-cellular-no-sim_117233.png"))); // NOI18N
-        botonCancelarReservacion.setText("Cancelar reservacion");
-        botonCancelarReservacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCancelarReservacionActionPerformed(evt);
-            }
-        });
-
         GroupLayout fondoPaneLayout = new GroupLayout(fondoPane);
         fondoPane.setLayout(fondoPaneLayout);
         fondoPaneLayout.setHorizontalGroup(
@@ -870,15 +884,11 @@ public class CACVista implements CACObservador, ActionListener{
             .addComponent(jPanel3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
             .addGroup(fondoPaneLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(botonSolicitarChips, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonSolicitarChips, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(botonVenderChip, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addComponent(botonReservarChip, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
+                .addComponent(botonOpcionesChip, GroupLayout.PREFERRED_SIZE, 350, GroupLayout.PREFERRED_SIZE))
             .addGroup(fondoPaneLayout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(botonCancelarReservacion, GroupLayout.PREFERRED_SIZE, 240, GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(270, 270, 270)
                 .addComponent(botonCerrarSesion, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE))
         );
         fondoPaneLayout.setVerticalGroup(
@@ -888,11 +898,9 @@ public class CACVista implements CACObservador, ActionListener{
                 .addGap(50, 50, 50)
                 .addGroup(fondoPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(botonSolicitarChips)
-                    .addComponent(botonVenderChip)
-                    .addComponent(botonReservarChip))
-                .addGap(30, 30, 30)
+                    .addComponent(botonOpcionesChip))
+                .addGap(20, 20, 20)
                 .addGroup(fondoPaneLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(botonCancelarReservacion)
                     .addComponent(botonCerrarSesion)))
         );
 
@@ -912,25 +920,17 @@ public class CACVista implements CACObservador, ActionListener{
         viewFrame3.pack();
     }                   
 
-    private void botonVenderChipActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    private void botonOpcionesChipActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // metodo para cuando se presiona el boton Vender Chip, que abre el submenu para escanear el codigo de barras del chip
         initSubmenuEscanearChip();
     }                                               
-
-    private void botonReservarChipActionPerformed(java.awt.event.ActionEvent evt) {                                                  
-        // metodo para cuando se presiona el boton Reservar Chip, que abre el submenu para escanear el codigo de barras del chip
-        initSubmenuEscanearChip();
-    }                                                                                                  
+                                                                                                  
 
     private void botonSolicitarChipsActionPerformed(java.awt.event.ActionEvent evt) {                                                    
        // metodo para solicitar chips al almacen
         model.solicitarMasChips();
     }                                                   
 
-    private void botonCancelarReservacionActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // metodo para cuando se presiona el boton Cancelar Reservacion de chip, que abre el submenu para escanear el codigo de barras del chip
-        initSubmenuEscanearChip();
-    }
     
     public void actionPerformed(ActionEvent event){
         System.out.println("Evento no identificado: " + event.getActionCommand());
